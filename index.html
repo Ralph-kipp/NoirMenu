@@ -119,6 +119,14 @@ header::before{
   padding:6px 22px;font-size:9px;letter-spacing:0.3em;
   color:var(--champagne);text-transform:uppercase;
 }
+.cart-toggle{
+  position:fixed;top:18px;right:18px;z-index:4500;
+  background:linear-gradient(180deg,#1d1d25,#101015);border:1px solid var(--champagne-dim);
+  color:var(--champagne-lt);font-family:var(--sans);font-size:10px;font-weight:300;
+  letter-spacing:0.28em;text-transform:uppercase;padding:10px 15px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);transition:all 0.25s ease;
+}
+.cart-toggle:hover{border-color:var(--champagne);color:var(--silver);transform:translateY(-1px);}
 .dot{width:4px;height:4px;background:var(--crimson);border-radius:50%;
   box-shadow:0 0 6px var(--crimson);animation:blink 2.4s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
@@ -324,6 +332,13 @@ header::before{
   display:flex;align-items:flex-end;justify-content:space-between;
   border-top:1px solid var(--border);padding-top:0.9rem;margin-top:auto;
 }
+.card-cart-btn{
+  width:100%;margin-top:0.9rem;background:linear-gradient(180deg,#24242d,#14141a);
+  border:1px solid var(--champagne-dim);color:var(--champagne-lt);font-family:var(--sans);
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:9px 12px;
+  cursor:pointer;transition:all 0.2s ease;
+}
+.card-cart-btn:hover{border-color:var(--champagne);color:var(--silver);background:linear-gradient(180deg,#2d2d38,#18181f);}
 .plabel{font-size:8px;letter-spacing:0.35em;color:var(--mist);text-transform:uppercase;margin-bottom:3px;}
 .price{
   font-family:var(--serif);font-size:1.7rem;font-weight:500;line-height:1;
@@ -439,8 +454,49 @@ header::before{
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
   background:linear-gradient(180deg,#1a1a22,#101015);color:var(--champagne-lt);font-size:10px;
   letter-spacing:0.3em;text-transform:uppercase;padding:11px 28px;border:1px solid var(--champagne-dim);
-  opacity:0;transition:all 0.4s ease;z-index:9000;pointer-events:none;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+  opacity:0;transition:all 0.4s ease;z-index:11000;pointer-events:none;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* CART */
+.cart-overlay{position:fixed;inset:0;background:rgba(4,4,7,0.68);z-index:9500;
+  opacity:0;pointer-events:none;transition:opacity 0.28s ease;backdrop-filter:blur(2px);}
+.cart-overlay.open{opacity:1;pointer-events:auto;}
+.cart-drawer{
+  position:fixed;top:0;right:0;width:min(420px,100vw);height:100vh;z-index:10000;
+  background:linear-gradient(180deg,#101015,#09090d);border-left:1px solid var(--border-hi);
+  box-shadow:-24px 0 70px rgba(0,0,0,0.65);transform:translateX(100%);
+  transition:transform 0.32s ease;display:flex;flex-direction:column;
+}
+.cart-drawer.open{transform:translateX(0);}
+.cart-head{padding:1.35rem 1.5rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#15151b,#101015);}
+.cart-title{font-family:var(--display);font-size:1rem;letter-spacing:0.18em;color:var(--silver);text-transform:uppercase;}
+.cart-close{background:none;border:none;color:var(--text-dim);font-size:1.7rem;line-height:1;cursor:pointer;}
+.cart-close:hover{color:var(--silver);}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.2rem;}
+.cart-empty{padding:3rem 1rem;text-align:center;font-family:var(--serif);font-size:1.25rem;font-style:italic;color:var(--mist);}
+.cart-row{border-bottom:1px solid var(--border);padding:1rem 0;}
+.cart-row-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:0.65rem;}
+.cart-name{font-family:var(--serif);font-size:1.1rem;color:var(--silver);line-height:1.2;}
+.cart-price,.cart-line{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--champagne-lt);}
+.cart-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.qty-controls{display:flex;align-items:center;border:1px solid var(--border);}
+.qty-btn{width:31px;height:30px;background:var(--card-solid);border:none;color:var(--platinum);
+  cursor:pointer;font-size:1rem;line-height:1;transition:background 0.2s;}
+.qty-btn:hover{background:rgba(200,169,106,0.08);}
+.qty-value{min-width:34px;text-align:center;font-size:10px;letter-spacing:0.18em;color:var(--text);}
+.cart-remove{background:none;border:1px solid var(--border);color:var(--text-dim);font-family:var(--sans);
+  font-size:8px;letter-spacing:0.24em;text-transform:uppercase;padding:7px 10px;cursor:pointer;}
+.cart-remove:hover{border-color:var(--crimson);color:var(--crimson);}
+.cart-foot{border-top:1px solid var(--border);padding:1.2rem 1.5rem;background:#0b0b0f;}
+.cart-subtotal{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;}
+.cart-subtotal span:first-child{font-size:9px;letter-spacing:0.32em;color:var(--mist);text-transform:uppercase;}
+.cart-subtotal span:last-child{font-family:var(--serif);font-size:1.7rem;color:var(--champagne-lt);}
+.checkout-btn{width:100%;background:linear-gradient(180deg,#2a2a33,#16161c);border:1px solid var(--champagne-dim);
+  color:var(--champagne-lt);font-family:var(--sans);font-size:9.5px;letter-spacing:0.25em;
+  text-transform:uppercase;padding:12px 14px;cursor:pointer;transition:all 0.2s;}
+.checkout-btn:hover:not(:disabled){border-color:var(--champagne);color:var(--silver);}
+.checkout-btn:disabled{opacity:0.42;cursor:not-allowed;}
 
 footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
   background:linear-gradient(180deg,#0a0a0e,#070709);position:relative;z-index:2;}
@@ -451,6 +507,9 @@ footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
   .fgrid{grid-template-columns:1fr;}
   .brand{font-size:2.8rem;}
   .tab{padding:10px 14px;font-size:9.5px;}
+  .cart-toggle{top:10px;right:10px;padding:9px 11px;font-size:9px;letter-spacing:0.18em;}
+  .cart-drawer{width:100vw;}
+  .toast{max-width:calc(100vw - 24px);white-space:normal;text-align:center;}
 }
 </style>
 </head>
@@ -459,6 +518,7 @@ footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
 <div class="vignette"></div>
 
 <header>
+  <button class="cart-toggle" type="button" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
   <p class="eyebrow">Nairobi · The Fragrance Atelier</p>
   <h1 class="brand">NOIR</h1>
   <p class="brand-sub">Scent, after dark</p>
@@ -612,6 +672,22 @@ footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-head">
+    <p class="cart-title">Your Cart</p>
+    <button class="cart-close" type="button" onclick="closeCart()" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">KES 0</span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn" type="button" onclick="checkoutWhatsApp()" disabled>Checkout via WhatsApp</button>
+  </div>
+</aside>
 
 <footer>
   <div class="orn" style="margin-bottom:0.8rem"><div class="orn-line"></div><div class="orn-d"></div><div class="orn-line r"></div></div>
@@ -963,9 +1039,13 @@ function buildHouseList(){
 /* ===== STATE ===== */
 let activeMode='season',activeSeasonF='all',activeHouseF='all',activeOccF='all',activeSearch='',sortOrder='default';
 let selectedSeasons=[],selectedOccs=[],accordTags=[],noirSelected=false;
+const CART_STORAGE_KEY='noir-cart';
+const WHATSAPP_NUMBER='254702581356';
+const cart=[];
 
 /* ===== INIT ===== */
 function init(){
+  restoreCart();
   const row=document.getElementById('house-chips');
   buildHouseList().forEach(h=>{
     const b=document.createElement('button');
@@ -974,6 +1054,7 @@ function init(){
     row.appendChild(b);
   });
   render();
+  updateCartUI();
 }
 
 function setMode(mode){
@@ -1059,9 +1140,148 @@ function renderCard(p,i){
         </div>
         <span class="tier t-${p.tier}">${tierLabel}</span>
       </div>
+      <button class="card-cart-btn" type="button" onclick="addToCart(${p.id},event)">Add To Cart</button>
     </div>
     <span class="season-badge">${seasonLabel(p.seasons)}</span>
   </div>`;
+}
+
+/* ===== CART ===== */
+function formatKes(amount){
+  return 'KES '+Number(amount||0).toLocaleString();
+}
+
+function findPerfume(id){
+  return PERFUMES.find(p=>String(p.id)===String(id));
+}
+
+function persistCart(){
+  localStorage.setItem(CART_STORAGE_KEY,JSON.stringify(cart));
+}
+
+function restoreCart(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(CART_STORAGE_KEY)||'[]');
+    if(Array.isArray(saved)){
+      cart.splice(0,cart.length,...saved
+        .filter(item=>item&&item.id&&item.name&&Number(item.price)>0&&Number(item.quantity)>0)
+        .map(item=>({
+          id:item.id,
+          name:String(item.name),
+          price:Number(item.price),
+          quantity:Math.max(1,Math.floor(Number(item.quantity)))
+        })));
+    }
+  }catch(_){
+    cart.splice(0,cart.length);
+  }
+}
+
+function getCartSubtotal(){
+  return cart.reduce((sum,item)=>sum+(item.price*item.quantity),0);
+}
+
+function getCartCount(){
+  return cart.reduce((sum,item)=>sum+item.quantity,0);
+}
+
+function addToCart(id,event){
+  if(event) event.stopPropagation();
+  const product=findPerfume(id);
+  if(!product){showToast('Fragrance unavailable');return;}
+  const existing=cart.find(item=>String(item.id)===String(id));
+  if(existing) existing.quantity+=1;
+  else cart.push({id:product.id,name:product.name,price:product.price,quantity:1});
+  persistCart();
+  updateCartUI();
+  showToast(product.name+' added to cart');
+}
+
+function removeFromCart(id){
+  const index=cart.findIndex(item=>String(item.id)===String(id));
+  if(index>-1){
+    cart.splice(index,1);
+    persistCart();
+    updateCartUI();
+  }
+}
+
+function updateCartQuantity(id,change){
+  const item=cart.find(entry=>String(entry.id)===String(id));
+  if(!item) return;
+  item.quantity+=change;
+  if(item.quantity<=0) removeFromCart(id);
+  else{
+    persistCart();
+    updateCartUI();
+  }
+}
+
+function updateCartUI(){
+  document.getElementById('cart-count').textContent=getCartCount();
+  document.getElementById('cart-subtotal').textContent=formatKes(getCartSubtotal());
+  document.getElementById('checkout-btn').disabled=!cart.length;
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const wrap=document.getElementById('cart-items');
+  if(!cart.length){
+    wrap.innerHTML='<div class="cart-empty">Your cart is empty.</div>';
+    return;
+  }
+  wrap.innerHTML=cart.map(item=>`
+    <div class="cart-row">
+      <div class="cart-row-top">
+        <div>
+          <p class="cart-name">${escapeHtml(item.name)}</p>
+          <p class="cart-price">${formatKes(item.price)} each</p>
+        </div>
+        <p class="cart-line">${formatKes(item.price*item.quantity)}</p>
+      </div>
+      <div class="cart-controls">
+        <div class="qty-controls" aria-label="Quantity controls for ${escapeHtml(item.name)}">
+          <button class="qty-btn" type="button" onclick="updateCartQuantity(${JSON.stringify(item.id)},-1)">−</button>
+          <span class="qty-value">${item.quantity}</span>
+          <button class="qty-btn" type="button" onclick="updateCartQuantity(${JSON.stringify(item.id)},1)">+</button>
+        </div>
+        <button class="cart-remove" type="button" onclick="removeFromCart(${JSON.stringify(item.id)})">Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openCart(){
+  document.getElementById('cart-overlay').classList.add('open');
+  document.getElementById('cart-drawer').classList.add('open');
+}
+
+function closeCart(){
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.getElementById('cart-drawer').classList.remove('open');
+}
+
+function checkoutWhatsApp(){
+  if(!cart.length) return;
+  const lines=cart.map((item,index)=>`${index+1}. ${item.name} x${item.quantity} - KES ${item.price*item.quantity}`);
+  const message=[
+    'Hello NOIR,',
+    '',
+    "I'd like to order:",
+    '',
+    ...lines,
+    '',
+    `Total: KES ${getCartSubtotal()}`,
+    '',
+    'Please confirm availability.'
+  ].join('\n');
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,'_blank','noopener');
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[char]));
 }
 
 function render(){
@@ -1184,6 +1404,7 @@ init();
   href="https://wa.me/254702581356?text=Hello%20NOIR%2C%20I'm%20interested%20in%20a%20fragrance."
   class="whatsapp-float"
   target="_blank"
+  rel="noopener"
 >
   <img
     src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
