@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR — The Fragrance Atelier</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#07070a;
+  --bg:#0b0b0f;
+  --bg2:#0e0e13;
+  --card-solid:#14141b;
+  --border:#26262f;
+  --border-lt:#39394550;
+  --border-hi:#4a4a58;
+  --platinum:#d4d4dc;
+  --platinum-dim:#8d8d99;
+  --silver:#ebebf1;
+  --champagne:#c8a96a;
+  --champagne-lt:#e0c890;
+  --champagne-dim:#8a7038;
+  --crimson:#a23246;
+  --crimson-dim:#6e1f2c;
+  --oxblood:#5a1a24;
+  --text:#d6d6dd;
+  --text-dim:#82828e;
+  --mist:#5b5b67;
+  --serif:'Cormorant Garamond','Hoefler Text',Georgia,'Times New Roman',serif;
+  --display:'Cinzel','Trajan Pro',Georgia,serif;
+  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:300;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Reflective ambient glow at top */
+body::after{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;height:60vh;
+  pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,169,106,0.06), transparent 70%);
+}
+
+/* Dark grain texture */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:0.6;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Vignette */
+.vignette{
+  position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.55) 100%);
+}
+
+/* ======= HEADER ======= */
+header{
+  text-align:center;
+  padding:4.5rem 2rem 2.5rem;
+  border-bottom:1px solid var(--border);
+  position:relative;
+  z-index:2;
+  background:linear-gradient(180deg,#0d0d12 0%,#0a0a0e 100%);
+  overflow:hidden;
+}
+
+/* faint reflective floor line */
+header::before{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(to right,transparent,var(--champagne-dim),transparent);
+  opacity:0.5;
+}
+
+.eyebrow{
+  font-family:var(--sans);font-weight:200;font-size:9px;
+  letter-spacing:0.6em;color:var(--champagne);text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.brand{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(3rem,9vw,6rem);
+  line-height:1;letter-spacing:0.22em;
+  margin-bottom:0.6rem;margin-left:0.22em;
+  color:var(--silver);
+  background:linear-gradient(180deg,#ffffff 0%,#d0d0d8 38%,#9a9aa6 58%,#e6e6ee 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 12px rgba(0,0,0,0.6));
+}
+
+.brand-sub{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:1.2rem;color:var(--platinum-dim);
+  letter-spacing:0.06em;margin-bottom:2rem;
+}
+
+.orn{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-bottom:1.8rem;}
+.orn-line{height:1px;width:70px;background:linear-gradient(to right,transparent,var(--champagne-dim));}
+.orn-line.r{background:linear-gradient(to left,transparent,var(--champagne-dim));}
+.orn-d{width:5px;height:5px;background:var(--champagne);transform:rotate(45deg);flex-shrink:0;
+  box-shadow:0 0 8px rgba(200,169,106,0.5);}
+
+.delivery{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border);background:rgba(200,169,106,0.05);
+  padding:6px 22px;font-size:9px;letter-spacing:0.3em;
+  color:var(--champagne);text-transform:uppercase;
+}
+.dot{width:4px;height:4px;background:var(--crimson);border-radius:50%;
+  box-shadow:0 0 6px var(--crimson);animation:blink 2.4s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+
+/* ======= CONTROLS ======= */
+.controls{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 1rem;position:relative;z-index:2;}
+.ctrl-label{font-size:9px;letter-spacing:0.55em;color:var(--mist);text-transform:uppercase;margin-bottom:1rem;}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.8rem;flex-wrap:wrap;}
+.tab{
+  background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;
+  color:var(--mist);font-family:var(--sans);font-weight:300;font-size:10.5px;
+  letter-spacing:0.3em;text-transform:uppercase;padding:11px 26px 13px;cursor:pointer;
+  transition:all 0.25s ease;
+}
+.tab.active{color:var(--silver);border-bottom-color:var(--champagne);}
+.tab:hover:not(.active){color:var(--platinum-dim);}
+.tab.noir-tab.active{border-bottom-color:var(--crimson);color:var(--crimson);}
+
+.frow{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:0.6rem;}
+.chip{
+  background:none;border:1px solid var(--border);color:var(--text-dim);
+  font-family:var(--sans);font-weight:300;font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;padding:6px 16px;cursor:pointer;transition:all 0.2s ease;
+  white-space:nowrap;
+}
+.chip.active{border-color:var(--champagne-dim);color:var(--champagne-lt);background:rgba(200,169,106,0.08);}
+.chip:hover:not(.active){border-color:var(--border-hi);color:var(--text);}
+
+.sublabel{
+  font-size:8.5px;letter-spacing:0.45em;color:var(--mist);text-transform:uppercase;
+  margin:1.2rem 0 0.7rem;display:flex;align-items:center;gap:10px;
+}
+.sublabel::before,.sublabel::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.orow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5rem;}
+.ochip{
+  background:none;border:1px dashed var(--border);color:var(--text-dim);
+  font-family:var(--sans);font-weight:300;font-size:9.5px;letter-spacing:0.2em;
+  text-transform:uppercase;padding:5px 13px;cursor:pointer;transition:all 0.2s ease;
+}
+.ochip.active{border-style:solid;border-color:var(--crimson);color:var(--crimson);background:rgba(162,50,70,0.1);}
+.ochip:hover:not(.active){border-color:var(--border-hi);color:var(--text);}
+
+.search-wrap{margin-bottom:1.2rem;}
+.search-input{
+  width:100%;background:var(--card-solid);border:none;border-bottom:1px solid var(--border);
+  color:var(--text);font-family:var(--serif);font-size:1.25rem;font-weight:300;font-style:italic;
+  padding:11px 4px;outline:none;letter-spacing:0.04em;transition:border-color 0.2s;
+}
+.search-input::placeholder{color:var(--mist);}
+.search-input:focus{border-bottom-color:var(--champagne-dim);}
+
+/* Noir collection intro */
+.noir-intro{
+  display:none;max-width:1000px;margin:0 auto 0.5rem;padding:0 2rem;position:relative;z-index:2;
+}
+.noir-intro.show{display:block;}
+.noir-intro-inner{
+  border:1px solid var(--crimson-dim);background:linear-gradient(135deg,rgba(90,26,36,0.18),rgba(20,20,27,0.4));
+  padding:1.3rem 1.6rem;
+}
+.noir-intro-title{
+  font-family:var(--display);font-size:1rem;letter-spacing:0.18em;color:var(--crimson);
+  margin-bottom:0.5rem;text-transform:uppercase;
+}
+.noir-intro-text{font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--platinum-dim);line-height:1.6;}
+
+.meta{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.8rem 2rem 1rem;max-width:1000px;margin:0 auto;
+  border-bottom:1px solid var(--border);position:relative;z-index:2;
+}
+.count{font-size:10.5px;letter-spacing:0.25em;color:var(--text-dim);text-transform:uppercase;}
+.count strong{color:var(--champagne-lt);font-weight:400;}
+.sortsel{
+  background:var(--card-solid);border:1px solid var(--border);color:var(--text-dim);
+  font-family:var(--sans);font-size:9.5px;letter-spacing:0.15em;padding:6px 11px;
+  cursor:pointer;text-transform:uppercase;outline:none;appearance:none;
+}
+
+/* ======= CATALOGUE ======= */
+.catalogue{
+  max-width:1000px;margin:0 auto;padding:2rem 2rem 4rem;position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;
+}
+
+.card{
+  position:relative;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+  background:linear-gradient(162deg,#181820 0%,#111117 55%,#0d0d12 100%);
+  border:1px solid var(--border);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04), 0 4px 18px rgba(0,0,0,0.4);
+  transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  animation:rise 0.5s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:var(--border-hi);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 14px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(200,169,106,0.08);
+}
+
+/* reflective sheen sweep */
+.sheen{
+  position:absolute;top:0;left:-70%;width:45%;height:100%;pointer-events:none;z-index:3;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,0.07),transparent);
+  transform:skewX(-20deg);transition:left 0.7s ease;
+}
+.card:hover .sheen{left:140%;}
+
+/* Noir collection card accent */
+.card.noir{border-color:var(--crimson-dim);}
+.card.noir::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;z-index:4;
+  background:linear-gradient(180deg,var(--crimson),var(--champagne));
+}
+.card.noir:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,0.07),0 14px 40px rgba(0,0,0,0.6),0 0 0 1px rgba(162,50,70,0.25);}
+
+.stripe{height:3px;width:100%;position:relative;z-index:2;}
+.ss-summer{background:linear-gradient(to right,#a6692a,#d8a850,#b07a30);}
+.ss-winter{background:linear-gradient(to right,#365a82,#6a9ec0,#48708f);}
+.ss-spring{background:linear-gradient(to right,#5a8a42,#9ac070,#6a9a52);}
+.ss-autumn{background:linear-gradient(to right,#8a4a1e,#bc7438,#9a5a2a);}
+.ss-all{background:linear-gradient(to right,var(--champagne-dim),var(--champagne-lt),var(--champagne-dim));}
+
+.body{padding:1.4rem 1.35rem 1.1rem;flex:1;display:flex;flex-direction:column;position:relative;z-index:2;}
+
+.house{
+  font-size:8.5px;letter-spacing:0.5em;color:var(--champagne-dim);text-transform:uppercase;
+  font-weight:400;margin-bottom:0.4rem;
+}
+.name{
+  font-family:var(--serif);font-size:1.6rem;font-weight:500;color:var(--silver);
+  line-height:1.12;margin-bottom:0.7rem;letter-spacing:0.01em;
+}
+
+.noir-badge{
+  display:inline-flex;align-items:center;gap:5px;font-size:7.5px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--crimson);border:1px solid var(--crimson-dim);
+  padding:3px 8px;margin-bottom:0.7rem;background:rgba(162,50,70,0.08);align-self:flex-start;
+}
+.noir-badge::before{content:'';width:4px;height:4px;background:var(--crimson);transform:rotate(45deg);}
+
+.accords{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:0.85rem;}
+.accord{
+  font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--platinum-dim);
+  border:1px solid var(--border);padding:2px 8px;background:rgba(255,255,255,0.015);
+}
+
+.scent{
+  font-family:var(--serif);font-size:13.5px;font-style:italic;font-weight:300;
+  color:var(--text-dim);line-height:1.6;margin-bottom:1rem;
+}
+
+/* Pyramid */
+.pyramid{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:0.7rem 0;margin-bottom:1rem;display:flex;flex-direction:column;gap:6px;
+}
+.pyr{display:flex;gap:10px;align-items:baseline;}
+.pyr-lab{
+  width:42px;flex-shrink:0;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--champagne-dim);font-family:var(--sans);font-weight:400;
+}
+.pyr-notes{flex:1;font-size:11.5px;color:var(--platinum-dim);line-height:1.45;font-family:var(--serif);}
+
+.otags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1rem;}
+.otag{
+  font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--crimson);
+  border:1px solid rgba(162,50,70,0.28);padding:2px 7px;background:rgba(162,50,70,0.05);
+}
+
+.foot{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  border-top:1px solid var(--border);padding-top:0.9rem;margin-top:auto;
+}
+.plabel{font-size:8px;letter-spacing:0.35em;color:var(--mist);text-transform:uppercase;margin-bottom:3px;}
+.price{
+  font-family:var(--serif);font-size:1.7rem;font-weight:500;line-height:1;
+  color:var(--champagne-lt);
+  background:linear-gradient(180deg,#e8cd92,#c8a96a 55%,#8a7038);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.psub{font-size:8px;color:var(--mist);margin-top:2px;letter-spacing:0.1em;}
+
+.tier{font-size:8px;letter-spacing:0.32em;text-transform:uppercase;padding:4px 9px;border:1px solid;}
+.t-niche{color:var(--champagne-lt);border-color:var(--champagne-dim);background:rgba(200,169,106,0.06);}
+.t-designer{color:var(--platinum);border-color:var(--border-hi);background:rgba(255,255,255,0.025);}
+.t-cult{color:var(--crimson);border-color:var(--crimson-dim);background:rgba(162,50,70,0.06);}
+
+.season-badge{
+  position:absolute;top:12px;right:12px;font-size:7.5px;letter-spacing:0.28em;
+  text-transform:uppercase;padding:3px 8px;background:rgba(7,7,10,0.85);
+  border:1px solid var(--border);color:var(--text-dim);z-index:4;
+}
+
+.no-results{grid-column:1/-1;text-align:center;padding:5rem 2rem;}
+.nr-title{font-family:var(--serif);font-size:2rem;font-style:italic;color:var(--border-hi);margin-bottom:0.8rem;}
+.nr-sub{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--mist);}
+
+/* ADD TRIGGER */
+.add-trigger{
+  display:block;width:100%;text-align:center;background:var(--bg2);
+  border:1px dashed var(--border);border-top:1px solid var(--border);
+  padding:1.1rem;font-family:var(--sans);font-size:9.5px;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--champagne-dim);cursor:pointer;transition:all 0.25s ease;
+  position:relative;z-index:2;
+}
+.add-trigger:hover{background:rgba(200,169,106,0.05);color:var(--champagne-lt);border-color:var(--champagne-dim);}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(4,4,7,0.78);z-index:5000;
+  align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px);}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--bg);border:1px solid var(--border-hi);max-width:600px;width:100%;
+  max-height:92vh;overflow-y:auto;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.mhead{
+  background:linear-gradient(180deg,#101015,#0c0c11);border-bottom:1px solid var(--border);
+  padding:1.4rem 1.8rem;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:5;
+}
+.mtitle{font-family:var(--display);font-size:1rem;font-weight:500;letter-spacing:0.16em;color:var(--silver);text-transform:uppercase;}
+.mclose{background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;line-height:1;transition:color 0.2s;}
+.mclose:hover{color:var(--silver);}
+.mbody{padding:1.8rem;}
+
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg.full{grid-column:1/-1;}
+.flabel{font-size:8.5px;letter-spacing:0.4em;text-transform:uppercase;color:var(--text-dim);font-weight:300;}
+
+.finput,.fselect,.ftext{
+  background:var(--card-solid);border:none;border-bottom:1px solid var(--border);
+  color:var(--text);font-family:var(--serif);font-size:1rem;font-weight:300;
+  padding:8px 4px;outline:none;transition:border-color 0.2s;width:100%;
+}
+.finput:focus,.fselect:focus,.ftext:focus{border-bottom-color:var(--champagne-dim);}
+.fselect{appearance:none;cursor:pointer;}
+.fselect option{background:var(--card-solid);color:var(--text);}
+.ftext{font-style:italic;resize:vertical;min-height:60px;border:1px solid var(--border);padding:8px;background:rgba(255,255,255,0.015);}
+
+.tagwrap{
+  background:rgba(255,255,255,0.015);border:1px solid var(--border);padding:6px 8px;
+  display:flex;flex-wrap:wrap;gap:5px;align-items:center;min-height:40px;transition:border-color 0.2s;
+}
+.tagwrap:focus-within{border-color:var(--champagne-dim);}
+.tpill{display:inline-flex;align-items:center;gap:4px;background:var(--card-solid);
+  border:1px solid var(--border);color:var(--platinum-dim);font-size:9px;letter-spacing:0.15em;
+  text-transform:uppercase;padding:2px 8px;}
+.tpill button{background:none;border:none;color:var(--mist);cursor:pointer;font-size:12px;line-height:1;padding:0;}
+.tinput{border:none;background:none;font-family:var(--sans);font-size:10px;color:var(--text);outline:none;min-width:80px;flex:1;padding:2px 4px;}
+.thint{font-size:8px;color:var(--mist);letter-spacing:0.1em;margin-top:3px;}
+
+/* noir toggle in modal */
+.noir-toggle{
+  grid-column:1/-1;display:flex;align-items:center;gap:12px;
+  border:1px solid var(--crimson-dim);background:rgba(162,50,70,0.07);padding:0.9rem 1.1rem;cursor:pointer;
+}
+.noir-toggle .box{
+  width:18px;height:18px;border:1px solid var(--crimson);flex-shrink:0;display:flex;
+  align-items:center;justify-content:center;transition:all 0.2s;
+}
+.noir-toggle.on .box{background:var(--crimson);}
+.noir-toggle .box::after{content:'✓';color:var(--silver);font-size:11px;opacity:0;transition:opacity 0.2s;}
+.noir-toggle.on .box::after{opacity:1;}
+.noir-toggle .lbl{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--crimson);}
+.noir-toggle .desc{font-family:var(--serif);font-style:italic;font-size:0.95rem;color:var(--platinum-dim);}
+
+.preview{background:rgba(200,169,106,0.06);border:1px solid var(--champagne-dim);padding:0.9rem 1rem;margin-top:1rem;text-align:center;}
+.preview-lab{font-size:8.5px;letter-spacing:0.4em;text-transform:uppercase;color:var(--mist);margin-bottom:4px;}
+.preview-val{font-family:var(--serif);font-size:1.7rem;color:var(--champagne-lt);font-weight:500;
+  background:linear-gradient(180deg,#e8cd92,#c8a96a 55%,#8a7038);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.preview-note{font-size:9px;color:var(--mist);margin-top:3px;}
+
+.mfoot{display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--border);
+  padding:1.2rem 1.8rem;position:sticky;bottom:0;background:var(--bg);}
+.btn-cancel{background:none;border:1px solid var(--border);color:var(--text-dim);font-family:var(--sans);
+  font-size:9.5px;letter-spacing:0.3em;text-transform:uppercase;padding:9px 22px;cursor:pointer;transition:all 0.2s;}
+.btn-cancel:hover{border-color:var(--border-hi);color:var(--text);}
+.btn-add{background:linear-gradient(180deg,#2a2a33,#16161c);border:1px solid var(--champagne-dim);
+  color:var(--champagne-lt);font-family:var(--sans);font-size:9.5px;letter-spacing:0.3em;
+  text-transform:uppercase;padding:9px 24px;cursor:pointer;transition:all 0.2s;}
+.btn-add:hover{background:linear-gradient(180deg,#34343f,#1c1c24);border-color:var(--champagne);color:var(--silver);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:linear-gradient(180deg,#1a1a22,#101015);color:var(--champagne-lt);font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;padding:11px 28px;border:1px solid var(--champagne-dim);
+  opacity:0;transition:all 0.4s ease;z-index:9000;pointer-events:none;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
+  background:linear-gradient(180deg,#0a0a0e,#070709);position:relative;z-index:2;}
+.foot-text{font-size:9px;letter-spacing:0.38em;color:var(--mist);text-transform:uppercase;}
+
+@media(max-width:600px){
+  .catalogue{grid-template-columns:1fr;}
+  .fgrid{grid-template-columns:1fr;}
+  .brand{font-size:2.8rem;}
+  .tab{padding:10px 14px;font-size:9.5px;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<header>
+  <p class="eyebrow">Nairobi · The Fragrance Atelier</p>
+  <h1 class="brand">NOIR</h1>
+  <p class="brand-sub">Scent, after dark</p>
+  <div class="orn"><div class="orn-line"></div><div class="orn-d"></div><div class="orn-line r"></div></div>
+  <div class="delivery"><div class="dot"></div>Free delivery · Nairobi CBD &amp; Westlands</div>
+</header>
+
+<div class="controls">
+  <p class="ctrl-label">Browse the House</p>
+  <div class="tabs">
+    <button class="tab active" id="tab-season" onclick="setMode('season')">By Season</button>
+    <button class="tab" id="tab-house" onclick="setMode('house')">By House</button>
+    <button class="tab" id="tab-search" onclick="setMode('search')">Search</button>
+    <button class="tab noir-tab" id="tab-noir" onclick="setMode('noir')">◆ The NOIR Collection</button>
+  </div>
+
+  <div id="panel-season">
+    <div class="frow">
+      <button class="chip active" onclick="filterChip(this,'season','all')">All Seasons</button>
+      <button class="chip" onclick="filterChip(this,'season','summer')">Summer</button>
+      <button class="chip" onclick="filterChip(this,'season','spring')">Spring</button>
+      <button class="chip" onclick="filterChip(this,'season','autumn')">Autumn</button>
+      <button class="chip" onclick="filterChip(this,'season','winter')">Winter</button>
+    </div>
+  </div>
+
+  <div id="panel-house" style="display:none">
+    <div class="frow" id="house-chips">
+      <button class="chip active" onclick="filterChip(this,'house','all')">All Houses</button>
+    </div>
+  </div>
+
+  <div id="panel-search" style="display:none">
+    <div class="search-wrap">
+      <input class="search-input" id="search-input" type="text" placeholder="Search by name, note, accord, mood…" oninput="doSearch(this.value)">
+    </div>
+  </div>
+
+  <div class="sublabel">Filter by Occasion</div>
+  <div class="orow">
+    <button class="ochip active" onclick="filterOcc(this,'all')">All</button>
+    <button class="ochip" onclick="filterOcc(this,'night-out')">Night Out</button>
+    <button class="ochip" onclick="filterOcc(this,'office')">Office</button>
+    <button class="ochip" onclick="filterOcc(this,'everyday')">Everyday</button>
+    <button class="ochip" onclick="filterOcc(this,'date')">Date Night</button>
+    <button class="ochip" onclick="filterOcc(this,'formal')">Formal</button>
+    <button class="ochip" onclick="filterOcc(this,'gym')">Sport</button>
+    <button class="ochip" onclick="filterOcc(this,'beach')">Beach</button>
+    <button class="ochip" onclick="filterOcc(this,'travel')">Travel</button>
+  </div>
+</div>
+
+<div class="noir-intro" id="noir-intro">
+  <div class="noir-intro-inner">
+    <p class="noir-intro-title">◆ The NOIR Collection</p>
+    <p class="noir-intro-text">The house's own curation — the most coveted bottles on our shelves, weighted toward the high-end. These are the scents we'd wear ourselves.</p>
+  </div>
+</div>
+
+<div class="meta">
+  <p class="count"><strong id="count-num">—</strong> fragrances</p>
+  <select class="sortsel" onchange="doSort(this.value)">
+    <option value="default">Order: Default</option>
+    <option value="price-asc">Price: Low to High</option>
+    <option value="price-desc">Price: High to Low</option>
+    <option value="name-asc">Name: A–Z</option>
+    <option value="house-asc">House: A–Z</option>
+  </select>
+</div>
+
+<div class="catalogue" id="catalogue"></div>
+
+<button class="add-trigger" onclick="openModal()">+ Add New Fragrance to Catalogue</button>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="mhead"><span class="mtitle">Add Fragrance</span><button class="mclose" onclick="closeModal()">×</button></div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="fg"><label class="flabel">Fragrance Name *</label><input class="finput" id="f-name" placeholder="e.g. Bleu de Chanel"></div>
+        <div class="fg"><label class="flabel">House / Brand *</label><input class="finput" id="f-house" placeholder="e.g. Chanel"></div>
+        <div class="fg"><label class="flabel">Tier *</label>
+          <select class="fselect" id="f-tier" onchange="updatePreview()">
+            <option value="">Select tier</option>
+            <option value="designer">Designer</option>
+            <option value="niche">Niche / High-End</option>
+            <option value="cult">Cult</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flabel">Cost Price (KES) *</label><input class="finput" id="f-cost" type="number" min="100" placeholder="e.g. 1500" oninput="updatePreview()"></div>
+
+        <div class="fg full"><label class="flabel">Seasons *</label>
+          <div class="frow" style="margin-bottom:0">
+            <button type="button" class="chip" onclick="toggleSeason(this,'summer')">Summer</button>
+            <button type="button" class="chip" onclick="toggleSeason(this,'spring')">Spring</button>
+            <button type="button" class="chip" onclick="toggleSeason(this,'autumn')">Autumn</button>
+            <button type="button" class="chip" onclick="toggleSeason(this,'winter')">Winter</button>
+            <button type="button" class="chip" id="chip-all-season" onclick="toggleAllSeason(this)">Year-Round</button>
+          </div>
+        </div>
+
+        <div class="fg full"><label class="flabel">Occasions *</label>
+          <div class="orow" style="margin-bottom:0" id="occ-picker">
+            <button type="button" class="ochip" onclick="toggleOcc(this,'night-out')">Night Out</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'office')">Office</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'everyday')">Everyday</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'date')">Date Night</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'formal')">Formal</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'gym')">Sport</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'beach')">Beach</button>
+            <button type="button" class="ochip" onclick="toggleOcc(this,'travel')">Travel</button>
+          </div>
+        </div>
+
+        <div class="fg full"><label class="flabel">Accords (Enter or comma to add)</label>
+          <div class="tagwrap" id="accord-wrap" onclick="document.getElementById('accord-input').focus()">
+            <input class="tinput" id="accord-input" placeholder="e.g. woody, fresh, spicy…" onkeydown="handleTagKey(event)">
+          </div>
+          <p class="thint">Press Enter or comma after each accord</p>
+        </div>
+
+        <div class="fg"><label class="flabel">Top Notes</label><input class="finput" id="f-top" placeholder="e.g. bergamot, lemon, pink pepper"></div>
+        <div class="fg"><label class="flabel">Heart Notes</label><input class="finput" id="f-heart" placeholder="e.g. jasmine, ginger, nutmeg"></div>
+        <div class="fg full"><label class="flabel">Base Notes</label><input class="finput" id="f-base" placeholder="e.g. sandalwood, cedar, amber"></div>
+
+        <div class="fg full"><label class="flabel">How It Smells</label>
+          <textarea class="ftext" id="f-scent" placeholder="A short, evocative description of the overall impression…"></textarea>
+        </div>
+
+        <div class="noir-toggle" id="noir-toggle" onclick="toggleNoir()">
+          <div class="box"></div>
+          <div>
+            <div class="lbl">◆ Add to The NOIR Collection</div>
+            <div class="desc">Feature among the house's curated favourites</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview">
+        <p class="preview-lab">Suggested Retail Price</p>
+        <p class="preview-val" id="preview-price">—</p>
+        <p class="preview-note">Enter cost price and tier to calculate</p>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-add" onclick="addPerfume()">Add to Catalogue</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="orn" style="margin-bottom:0.8rem"><div class="orn-line"></div><div class="orn-d"></div><div class="orn-line r"></div></div>
+  <p class="foot-text">NOIR · Nairobi · Authenticity Guaranteed · Free Delivery CBD &amp; Westlands</p>
+</footer>
+
+<script>
+/* ===== PRICING ENGINE — cost × tier markup, capped at 5000 ===== */
+function calcPrice(cost,tier){
+  const m={designer:2.2,niche:2.6,cult:2.4},cap=5000;
+  if(!cost||!tier||!m[tier])return null;
+  return Math.min(Math.round((cost*m[tier])/50)*50,cap);
+}
+
+/* ===== DATA — pyramid (top/heart/base) + scent on every entry ===== */
+let PERFUMES=[
+/* ---------- THE POPULAR / OVERHYPED LAYER ---------- */
+{id:101,house:'dior',houseName:'Dior',name:'Sauvage EDT',tier:'designer',seasons:['summer','spring','autumn'],occasions:['everyday','office','date'],accords:['fresh spicy','amber','woody'],
+ top:'bergamot, Sichuan pepper',heart:'lavender, pink pepper, geranium, elemi',base:'ambroxan, cedar, labdanum',
+ scent:'The blue-bottle juggernaut — ozonic citrus over a loud ambroxan haze. Clean, sharp, and engineered to please a room.',price:3300},
+{id:102,house:'dior',houseName:'Dior',name:'Sauvage Elixir',tier:'designer',noir:true,seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['spicy','woody','sweet'],
+ top:'cinnamon, nutmeg, cardamom, grapefruit',heart:'lavender, sweet wormwood',base:'licorice, amber, sandalwood, patchouli, Haitian vetiver',
+ scent:'Sauvage redrawn in oil paint — dense liquorice-spice and lavender wrapped in resinous wood. Two sprays last all night.',price:3950},
+{id:103,house:'dior',houseName:'Dior',name:'Dior Homme Intense',tier:'designer',seasons:['autumn','winter'],occasions:['formal','date','office'],accords:['iris','powdery','woody'],
+ top:'lavender',heart:'iris, ambrette, pear',base:'Virginia cedar, vetiver',
+ scent:'Liquid-makeup iris, buttery and powdery, with a romantic cedar dry-down. The gold standard for refined date-night elegance.',price:3650},
+{id:104,house:'dior',houseName:'Dior',name:'Miss Dior EDP',tier:'designer',seasons:['spring','summer'],occasions:['everyday','date','office'],accords:['floral','rose','musky'],
+ top:'bergamot, Italian mandarin',heart:'centifolia rose, peony, iris',base:'white musk, patchouli',
+ scent:'A bright, modern bouquet — dewy rose and peony over clean musk. Cheerful, feminine, and easy to wear daily.',price:3500},
+{id:105,house:'dior',houseName:'Dior',name:"J'adore EDP",tier:'designer',seasons:['spring','summer','autumn'],occasions:['formal','date','everyday'],accords:['white floral','fruity','vanilla'],
+ top:'pear, melon, magnolia, bergamot',heart:'jasmine, Damascus rose, lily-of-the-valley, plum',base:'musk, vanilla, blackberry, cedar',
+ scent:'Opulent golden white-florals — jasmine and rose draped in fruit and soft musk. The quintessential glamorous feminine.',price:3700},
+
+{id:106,house:'armani',houseName:'Giorgio Armani',name:'Acqua di Giò',tier:'designer',seasons:['summer','spring'],occasions:['everyday','beach','gym'],accords:['aquatic','citrus','marine'],
+ top:'lime, lemon, bergamot, neroli, mandarin',heart:'sea notes, jasmine, calone, peach, rosemary, hyacinth',base:'white musk, cedar, oakmoss, patchouli, amber',
+ scent:'The original blue aquatic — sun, salt-spray and citrus. A breezy beach in a bottle that defined an entire genre.',price:3100},
+{id:107,house:'armani',houseName:'Giorgio Armani',name:'Acqua di Giò Profumo',tier:'designer',noir:true,seasons:['autumn','winter','spring'],occasions:['formal','office','date'],accords:['aquatic','incense','woody'],
+ top:'sea notes, bergamot',heart:'geranium, sage, rosemary',base:'incense, patchouli, ambergris',
+ scent:'The dark, grown-up Acqua di Giò — marine freshness shadowed by smoky incense. Sophisticated, versatile, quietly powerful.',price:3600},
+{id:108,house:'armani',houseName:'Giorgio Armani',name:'Armani Code',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['warm spicy','tonka','tobacco'],
+ top:'bergamot, lemon',heart:'star anise, olive blossom, guaiac wood',base:'leather, tonka bean, tobacco',
+ scent:'Warm, soft and seductive — anise and tonka over a creamy tobacco base. A reliable evening charmer.',price:3050},
+{id:109,house:'armani',houseName:'Giorgio Armani',name:'Stronger With You',tier:'designer',seasons:['autumn','winter','spring'],occasions:['date','everyday','night-out'],accords:['sweet spicy','chestnut','vanilla'],
+ top:'cardamom, pink pepper, violet, juniper',heart:'cinnamon, lavender, sage, geranium',base:'vanilla, amberwood, chestnut, suede',
+ scent:'Cosy and crowd-pleasing — sweet roasted chestnut, cardamom and vanilla. A warm hug aimed straight at compliments.',price:3150},
+{id:110,house:'armani',houseName:'Giorgio Armani',name:'Sì EDP',tier:'designer',seasons:['autumn','winter'],occasions:['formal','date','office'],accords:['fruity chypre','blackcurrant','vanilla'],
+ top:'cassis, mandarin',heart:'rose, freesia, May rose',base:'vanilla, patchouli, amber, woods',
+ scent:'A modern fruity-chypre — juicy blackcurrant over patchouli and vanilla. Polished, elegant, distinctly feminine.',price:3400},
+
+{id:111,house:'chanel',houseName:'Chanel',name:'Bleu de Chanel EDP',tier:'designer',noir:true,seasons:['all'],occasions:['office','everyday','formal'],accords:['woody aromatic','fresh','amber'],
+ top:'grapefruit, lemon, mint, pink pepper, aldehydes',heart:'ginger, nutmeg, jasmine, melon',base:'incense, vetiver, cedar, sandalwood, labdanum',
+ scent:'The ultimate do-anything masculine — fresh citrus melting into smoky woods and incense. Confident, clean, endlessly versatile.',price:3800},
+{id:112,house:'chanel',houseName:'Chanel',name:'Coco Mademoiselle',tier:'designer',seasons:['all'],occasions:['everyday','office','date'],accords:['chypre','orange','patchouli'],
+ top:'orange, bergamot, mandarin',heart:'rose, jasmine, litchi',base:'patchouli, vetiver, vanilla, white musk, tonka',
+ scent:'Bright orange and rose riding a chic patchouli base — sparkling, elegant and instantly recognisable.',price:3850},
+{id:113,house:'chanel',houseName:'Chanel',name:'Coco Noir',tier:'designer',noir:true,seasons:['autumn','winter'],occasions:['night-out','formal','date'],accords:['oriental','dark floral','amber'],
+ top:'grapefruit, bergamot',heart:'rose, narcissus, jasmine, geranium',base:'sandalwood, tonka, vanilla, patchouli, frankincense, musk',
+ scent:'Mysterious and velvety — dusky florals over warm amber, incense and tonka. The most noir bottle on the shelf.',price:3800},
+{id:114,house:'chanel',houseName:'Chanel',name:'N°5 EDP',tier:'designer',seasons:['autumn','winter','spring'],occasions:['formal','date','everyday'],accords:['aldehydic','floral','powdery'],
+ top:'aldehydes, ylang-ylang, neroli, bergamot',heart:'jasmine, rose, lily-of-the-valley, iris',base:'vetiver, sandalwood, vanilla, amber, patchouli, musk',
+ scent:'The most famous perfume on earth — sparkling aldehydes over a soapy-powdery floral. Abstract, timeless, iconic.',price:3950},
+{id:115,house:'chanel',houseName:'Chanel',name:'Allure Homme Sport',tier:'designer',seasons:['summer','spring'],occasions:['everyday','gym','office'],accords:['citrus','woody','fresh'],
+ top:'orange, sea notes, aldehydes, mandarin',heart:'pepper, neroli, cedar',base:'tonka, white musk, vetiver, vanilla, amber',
+ scent:'Crisp citrus over clean woods and a whisper of vanilla. Effortlessly fresh — the everyday sport classic.',price:3500},
+{id:116,house:'chanel',houseName:'Chanel',name:'Chance Eau Tendre',tier:'designer',seasons:['spring','summer'],occasions:['everyday','office','date'],accords:['fruity floral','soft','fresh'],
+ top:'grapefruit, quince',heart:'jasmine, hyacinth',base:'white musk, amber, cedar',
+ scent:'Soft, juicy and joyful — grapefruit and jasmine over gentle musk. A light, flirty everyday feminine.',price:3500},
+
+{id:117,house:'ysl',houseName:'Yves Saint Laurent',name:'Black Opium',tier:'designer',noir:true,seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['sweet','coffee','vanilla'],
+ top:'pink pepper, orange blossom, pear',heart:'coffee, jasmine, bitter almond, licorice',base:'vanilla, patchouli, cedar, cashmeran',
+ scent:'Addictive black-coffee and vanilla, sweet and electric. The definitive going-out scent for the after-dark crowd.',price:3600},
+{id:118,house:'ysl',houseName:'Yves Saint Laurent',name:"La Nuit de L'Homme",tier:'designer',seasons:['autumn','winter','spring'],occasions:['date','night-out','formal'],accords:['spicy','sweet','woody'],
+ top:'cardamom, bergamot',heart:'lavender, cedar, cumin',base:'vetiver, caraway',
+ scent:'Smooth cardamom and cedar, gently sweet and impossibly seductive. The unofficial uniform of date night.',price:3200},
+
+{id:119,house:'versace',houseName:'Versace',name:'Eros',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','everyday','date'],accords:['fresh','sweet','aromatic'],
+ top:'mint, green apple, lemon',heart:'tonka bean, geranium, ambroxan',base:'vanilla, vetiver, cedar, oakmoss',
+ scent:'Cool mint and green apple over a sweet vanilla-tonka glow. Bold, youthful and built for the dancefloor.',price:2950},
+{id:120,house:'versace',houseName:'Versace',name:'Eros Flame',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['citrus','spicy','woody'],
+ top:'black pepper, mandarin, lemon, rosemary',heart:'pepperwood, geranium, rose',base:'tonka, vanilla, sandalwood, cedar, patchouli',
+ scent:'Eros grown warmer and spicier — peppery citrus over sweet woods. Richer, more refined, cold-weather ready.',price:3050},
+{id:121,house:'versace',houseName:'Versace',name:'Dylan Blue',tier:'designer',seasons:['summer','spring','autumn'],occasions:['everyday','office','gym'],accords:['aquatic','woody','aromatic'],
+ top:'bergamot, grapefruit, fig leaf, aquatic notes',heart:'violet leaf, papyrus, patchouli, black pepper, ambrox',base:'musk, tonka, incense, labdanum, saffron',
+ scent:'Fresh-aquatic with an ambroxy woody spine — clean but with attitude. A modern everyday workhorse.',price:2950},
+{id:122,house:'versace',houseName:'Versace',name:'Bright Crystal',tier:'designer',seasons:['spring','summer'],occasions:['everyday','office','date'],accords:['fruity floral','fresh','musky'],
+ top:'pomegranate, yuzu, icy accord',heart:'peony, magnolia, lotus',base:'musk, mahogany, amber',
+ scent:'Sparkling pomegranate and peony — light, pretty and refreshing. An easy daytime feminine crowd-pleaser.',price:2900},
+
+{id:123,house:'paco-rabanne',houseName:'Paco Rabanne',name:'1 Million',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['spicy','leather','sweet'],
+ top:'blood mandarin, grapefruit, mint',heart:'rose, cinnamon, spice',base:'leather, amber, patchouli, white woods',
+ scent:'Brash and blingy — spicy grapefruit over sweet leather and amber. Unapologetically loud party fuel.',price:3050},
+{id:124,house:'paco-rabanne',houseName:'Paco Rabanne',name:'Invictus',tier:'designer',seasons:['summer','spring'],occasions:['gym','everyday','beach'],accords:['aquatic','woody','sweet'],
+ top:'grapefruit, marine notes, mandarin',heart:'bay leaf, jasmine',base:'ambergris, guaiac, oakmoss, patchouli',
+ scent:'Fresh marine grapefruit over a sweet ambergris base. Sporty, energetic and engineered for the gym crowd.',price:2950},
+{id:125,house:'paco-rabanne',houseName:'Paco Rabanne',name:'Phantom',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','office','night-out'],accords:['fresh','lavender','vanilla'],
+ top:'lemon, lavender',heart:'apple, vetiver, spices',base:'vanilla, woody notes, patchouli',
+ scent:'Bright lemon-lavender melting into smooth vanilla. Clean, modern and very easy to like.',price:3100},
+{id:126,house:'paco-rabanne',houseName:'Paco Rabanne',name:'Lady Million',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','date','formal'],accords:['fruity floral','honey','amber'],
+ top:'neroli, raspberry, orange flower, lemon',heart:'jasmine, gardenia, orange blossom',base:'honey, patchouli, amber',
+ scent:'Sparkling raspberry and orange blossom over warm honey. Glamorous, festive and unmistakably bold.',price:3100},
+
+{id:127,house:'jpg',houseName:'Jean Paul Gaultier',name:'Le Male',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','date','everyday'],accords:['lavender','vanilla','sweet'],
+ top:'mint, lavender, bergamot, cardamom',heart:'cinnamon, orange blossom, cumin',base:'vanilla, tonka, sandalwood, amber',
+ scent:'The legendary minty-lavender over creamy vanilla — the barbershop scent that launched a thousand bottles.',price:3000},
+{id:128,house:'jpg',houseName:'Jean Paul Gaultier',name:'Ultra Male',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date'],accords:['sweet','fruity','vanilla'],
+ top:'pear, lavender, bergamot',heart:'cinnamon, clary sage, blackcurrant',base:'vanilla, amber, cedar',
+ scent:'Le Male on sugar — juicy pear and lavender over thick vanilla. A sweet, beastly nightclub bomb.',price:3150},
+{id:129,house:'jpg',houseName:'Jean Paul Gaultier',name:'Scandal Pour Homme',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','date','everyday'],accords:['sweet','caramel','aromatic'],
+ top:'blood orange, mandarin, clary sage',heart:'tonka, vetiver, beeswax',base:'caramel, vanilla, patchouli',
+ scent:'Honeyed caramel and blood orange — bold, sweet and unexpected. A statement scent with real reach.',price:3200},
+
+{id:130,house:'dolce-gabbana',houseName:'Dolce & Gabbana',name:'The One Men',tier:'designer',seasons:['autumn','winter'],occasions:['formal','date','office'],accords:['warm spicy','tobacco','amber'],
+ top:'grapefruit, coriander, basil',heart:'ginger, cardamom, orange blossom',base:'amber, tobacco, cedar',
+ scent:'Refined spicy-tobacco warmth — ginger and amber over soft smoke. An elegant office-to-dinner staple.',price:3300},
+{id:131,house:'dolce-gabbana',houseName:'Dolce & Gabbana',name:'Light Blue',tier:'designer',seasons:['summer','spring'],occasions:['everyday','beach','office'],accords:['citrus','fruity','woody'],
+ top:'Sicilian lemon, apple, cedar, bluebell',heart:'bamboo, jasmine, white rose',base:'cedar, amber, musk',
+ scent:'Zesty lemon and crisp apple — the definitive summer freshener. Bright, clean and Mediterranean.',price:3100},
+{id:132,house:'dolce-gabbana',houseName:'Dolce & Gabbana',name:'K by Dolce&Gabbana',tier:'designer',seasons:['summer','spring','autumn'],occasions:['everyday','office','date'],accords:['fresh spicy','aromatic','woody'],
+ top:'blood orange, lemon, juniper berries',heart:'pimento, geranium, lavender, clary sage',base:'cedar, vetiver, patchouli',
+ scent:'Vibrant citrus over dry herbs and wood — Mediterranean, masculine and easygoing.',price:3150},
+
+{id:133,house:'carolina-herrera',houseName:'Carolina Herrera',name:'Good Girl',tier:'designer',noir:true,seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['sweet','coffee','tuberose'],
+ top:'almond, coffee',heart:'tuberose, jasmine sambac',base:'tonka, cacao, vanilla, praline',
+ scent:'The stiletto bottle — heady tuberose over coffee, almond and praline. Dark, sweet and unapologetically sexy.',price:3700},
+{id:134,house:'carolina-herrera',houseName:'Carolina Herrera',name:'Bad Boy',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','date','everyday'],accords:['spicy','cocoa','amber'],
+ top:'white pepper, bergamot, black pepper',heart:'sage, cedar',base:'tonka, cacao, amber',
+ scent:'The counterpart to Good Girl — peppery cocoa over warm tonka. Modern, edgy and easy to wear out.',price:3500},
+{id:135,house:'carolina-herrera',houseName:'Carolina Herrera',name:'212 VIP Men',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date'],accords:['sweet','spicy','aromatic'],
+ top:'lime, frozen mint, pepper',heart:'vodka, ginger',base:'leather, amber, woods',
+ scent:'A nightlife scent through and through — vodka-lime and ginger over warm amber. Made for the club.',price:3100},
+
+{id:136,house:'azzaro',houseName:'Azzaro',name:'Wanted',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','office','date'],accords:['fresh spicy','citrus','woody'],
+ top:'lemon, ginger, lavender',heart:'cardamom, geranium, vetiver',base:'tonka, amberwood, woods',
+ scent:'Zesty ginger-citrus over warm amberwood. Fresh, spicy and remarkably versatile.',price:2950},
+{id:137,house:'azzaro',houseName:'Azzaro',name:'The Most Wanted',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['sweet','toffee','amber'],
+ top:'toffee, cardamom',heart:'ginger',base:'amberwood, woods',
+ scent:'Liquid toffee and amber — gourmand, intense and instantly addictive. A compliment magnet after dark.',price:3150},
+
+{id:138,house:'montblanc',houseName:'Montblanc',name:'Explorer',tier:'designer',seasons:['autumn','winter','spring'],occasions:['everyday','office','formal'],accords:['woody','leather','fresh'],
+ top:'bergamot, pink pepper, clary sage',heart:'leather, vetiver',base:'patchouli, ambroxan, akigalawood',
+ scent:'A fresh-woody powerhouse with leathery depth — Aventus-adjacent quality at a fraction of the price.',price:2700},
+{id:139,house:'montblanc',houseName:'Montblanc',name:'Legend',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','office','date'],accords:['fresh fougère','fruity','aromatic'],
+ top:'bergamot, lavender, pineapple, verbena',heart:'apple, rose, geranium, jasmine',base:'tonka, sandalwood, oakmoss',
+ scent:'Clean fruity-fougère — apple and lavender over soft tonka. A safe, polished daily signature.',price:2600},
+
+{id:140,house:'prada',houseName:'Prada',name:'Luna Rossa Carbon',tier:'designer',seasons:['all'],occasions:['everyday','office','gym'],accords:['fresh','metallic','woody'],
+ top:'bergamot, pepper',heart:'lavender, ambrette',base:'metallic notes, patchouli, ambroxan',
+ scent:'Cool metallic lavender over clean woods — modern, sleek and supremely wearable in any setting.',price:3300},
+{id:141,house:'prada',houseName:'Prada',name:'Paradoxe',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','date','office'],accords:['floral','amber','musky'],
+ top:'neroli',heart:'jasmine',base:'amber, musk, vanilla',
+ scent:'Soft neroli and jasmine wrapped in warm musky amber. Smooth, contemporary and quietly sensual.',price:3500},
+
+{id:142,house:'viktor-rolf',houseName:'Viktor & Rolf',name:'Spicebomb',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['spicy','tobacco','warm'],
+ top:'bergamot, grapefruit, pink pepper, elemi',heart:'cinnamon, saffron, paprika',base:'tobacco, leather, vetiver',
+ scent:'An explosion of warm spice — cinnamon and saffron over tobacco and leather. Cold-weather firepower.',price:3450},
+{id:143,house:'viktor-rolf',houseName:'Viktor & Rolf',name:'Flowerbomb',tier:'designer',seasons:['autumn','winter','spring'],occasions:['night-out','date','formal'],accords:['sweet floral','vanilla','patchouli'],
+ top:'tea, bergamot',heart:'jasmine, orchid, rose, freesia',base:'patchouli, musk, vanilla',
+ scent:'An explosive sweet bouquet — dense florals over vanilla and patchouli. A feminine bomb that fills a room.',price:3850},
+
+{id:144,house:'lattafa',houseName:'Lattafa',name:'Khamrah',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['gourmand','spicy','sweet'],
+ top:'cinnamon, nutmeg, bergamot',heart:'dates, praline, tuberose, mahogany',base:'vanilla, tonka, benzoin, myrrh, amberwood',
+ scent:'Boozy spiced dates and cinnamon over thick vanilla — the viral gourmand offering luxury vibes for pennies.',price:2300},
+{id:145,house:'lattafa',houseName:'Lattafa',name:'Asad',tier:'designer',seasons:['summer','spring','autumn'],occasions:['everyday','office','night-out'],accords:['fruity','woody','smoky'],
+ top:'blackcurrant, pineapple, bergamot',heart:'violet, geranium, vetiver, Virginia cedar',base:'ambergris, oakmoss, musk, vanilla, patchouli',
+ scent:'A confident fruity-woody Aventus riff — smoky pineapple and blackcurrant. Stunning performance for the price.',price:2100},
+{id:146,house:'lattafa',houseName:'Lattafa',name:'Yara',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','date','office'],accords:['sweet','fruity','creamy'],
+ top:'orchid, heliotrope, tropical fruits',heart:'jasmine',base:'musk, vanilla, sandalwood',
+ scent:'Creamy candied fruit and orchid over vanilla-sandalwood. Sweet, cosy and wildly popular.',price:1950},
+
+{id:147,house:'armaf',houseName:'Armaf',name:'Club de Nuit Intense Man',tier:'designer',noir:false,seasons:['summer','spring','autumn'],occasions:['everyday','office','formal'],accords:['fruity','smoky','woody'],
+ top:'lemon, blackcurrant, apple, bergamot, pineapple',heart:'rose, jasmine, birch',base:'ambergris, musk, vanilla, oakmoss',
+ scent:'The legendary Aventus clone — smoky pineapple and birch with monstrous longevity. Unbeatable value.',price:2400},
+{id:148,house:'armaf',houseName:'Armaf',name:'Club de Nuit Sillage',tier:'designer',seasons:['spring','summer','autumn'],occasions:['everyday','office','formal'],accords:['fresh','green','aromatic'],
+ top:'green notes, lemon, bergamot, tarragon, aldehydes',heart:'cardamom, lily, jasmine, ginger',base:'sandalwood, ambergris, musk, tonka, vetiver',
+ scent:'Crisp green-aromatic in the Green Irish Tweed school — fresh, expensive-smelling and a serious bargain.',price:2500},
+
+{id:149,house:'hugo-boss',houseName:'Hugo Boss',name:'Boss Bottled',tier:'designer',seasons:['autumn','winter','spring'],occasions:['office','everyday','formal'],accords:['woody','spicy','fruity'],
+ top:'apple, bergamot, lemon, geranium',heart:'cinnamon, clove, sandalwood',base:'vetiver, vanilla, cedar',
+ scent:'Warm apple-cinnamon over soft woods — the dependable office scent that never lets you down.',price:2900},
+{id:150,house:'givenchy',houseName:'Givenchy',name:'Gentleman EDP',tier:'designer',seasons:['autumn','winter'],occasions:['date','office','formal'],accords:['woody floral','iris','leather'],
+ top:'black pepper, pink pepper',heart:'iris, lavender',base:'leather, patchouli, black vanilla, woods',
+ scent:'Refined iris and leather over dark vanilla — masculine, romantic and very elegant.',price:3300},
+{id:151,house:'bvlgari',houseName:'Bvlgari',name:'Man in Black',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['spicy','leather','amber'],
+ top:'spices, rum, tobacco',heart:'leather, iris, orange blossom, tuberose',base:'tonka, benzoin, guaiac, amber, leather',
+ scent:'Boozy rum-spice over supple leather and amber — bold, warm and seductive. A nighttime statement.',price:3400},
+{id:152,house:'burberry',houseName:'Burberry',name:'Her EDP',tier:'designer',seasons:['autumn','winter','spring'],occasions:['everyday','date','night-out'],accords:['fruity','gourmand','sweet'],
+ top:'blackcurrant, raspberry, lemon, blackberry',heart:'jasmine, violet',base:'musk, amber, dry woods, vanilla',
+ scent:'Juicy berry compote over soft vanilla and musk — sweet, fun and very wearable.',price:3200},
+
+/* ---------- HOUSE PRESTIGE / HIGH-END (the NOIR backbone) ---------- */
+{id:1,house:'tom-ford',houseName:'Tom Ford',name:'Black Orchid',tier:'designer',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['dark floral','gourmand','oriental'],
+ top:'black truffle, bergamot, blackcurrant, ylang-ylang',heart:'black orchid, spice, lotus, fruity notes',base:'patchouli, vanilla, incense, sandalwood, dark chocolate',
+ scent:'Decadent and strange — truffle and dark chocolate under a brooding orchid. Opulent, unisex, unforgettable.',price:3350},
+{id:2,house:'tom-ford',houseName:'Tom Ford',name:'Oud Wood',tier:'designer',seasons:['autumn','winter'],occasions:['office','formal','date'],accords:['woody','smoky','warm spice'],
+ top:'oud, rosewood, cardamom',heart:'sandalwood, vetiver',base:'tonka bean, vanilla, amber',
+ scent:'Smooth, creamy oud for the West — warm woods and cardamom, never harsh. Quiet luxury in a bottle.',price:3650},
+{id:3,house:'tom-ford',houseName:'Tom Ford',name:'Neroli Portofino',tier:'designer',seasons:['summer','spring'],occasions:['everyday','beach','travel'],accords:['citrus','aromatic','aquatic'],
+ top:'bergamot, mandarin, lemon, lavender, myrtle',heart:'neroli, orange flower, jasmine, pittosporum',base:'amber, musk, angelica',
+ scent:'Sparkling soapy citrus and neroli — a dive into the Italian Riviera. Bright, clean and luxurious.',price:3150},
+{id:4,house:'tom-ford',houseName:'Tom Ford',name:'Tobacco Vanille',tier:'designer',noir:true,seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['tobacco','gourmand','spicy'],
+ top:'tobacco leaf, spices',heart:'vanilla, cacao, tonka, tobacco flower',base:'dried fruits, woody notes',
+ scent:'Rich pipe tobacco soaked in vanilla and spice — warm, sweet and gentlemanly. A cold-weather signature.',price:3800},
+{id:5,house:'tom-ford',houseName:'Tom Ford',name:'Rose Prick',tier:'niche',seasons:['spring','summer'],occasions:['date','formal','everyday'],accords:['rose','green','fruity'],
+ top:'rose',heart:'Turkish rose, Damask rose, May rose, tarragon',base:'patchouli, tonka, vetiver',
+ scent:'A lush, thorny garden rose — green, peppery and three-dimensional. Beautiful and a little dangerous.',price:4550},
+
+{id:6,house:'mfk',houseName:'Maison Francis Kurkdjian',name:'Baccarat Rouge 540',tier:'niche',noir:true,seasons:['all'],occasions:['date','formal','night-out'],accords:['amber','floral','woody'],
+ top:'saffron, jasmine',heart:'amberwood, ambergris',base:'fir resin, cedar',
+ scent:'Crystalline, airy amber with a jammy-woody glow — luminous and instantly recognisable. The modern legend.',price:5000},
+{id:7,house:'mfk',houseName:'Maison Francis Kurkdjian',name:'Grand Soir',tier:'niche',seasons:['autumn','winter'],occasions:['date','formal','night-out'],accords:['amber','vanilla','oriental'],
+ top:'amber accord',heart:'benzoin, tonka, vanilla',base:'amber, labdanum',
+ scent:'Warm honeyed amber and vanilla, smooth as silk. Evening-wear distilled into liquid gold.',price:5000},
+{id:8,house:'mfk',houseName:'Maison Francis Kurkdjian',name:'Aqua Universalis',tier:'niche',seasons:['summer','spring'],occasions:['everyday','office','gym'],accords:['fresh','white floral','citrus'],
+ top:'bergamot, lemon, mandarin',heart:'lily-of-the-valley, sweet pea',base:'white musk, woody notes',
+ scent:'Immaculately clean — bright citrus over soapy florals and musk. Fresh laundry, elevated to art.',price:4500},
+{id:9,house:'mfk',houseName:'Maison Francis Kurkdjian',name:'724',tier:'niche',seasons:['summer','spring','autumn'],occasions:['everyday','office','travel'],accords:['white musk','woody','clean'],
+ top:'aldehydes, bergamot, blackcurrant',heart:'jasmine, sweet pea, mock orange',base:'white musk, sandalwood, moss',
+ scent:'Crisp white musk and woods — the energy of a bright city morning. Clean, modern and effortless.',price:4800},
+
+{id:10,house:'creed',houseName:'Creed',name:'Aventus',tier:'niche',noir:true,seasons:['summer','spring','autumn'],occasions:['office','everyday','formal'],accords:['fruity','smoky','chypre'],
+ top:'pineapple, bergamot, blackcurrant, apple',heart:'birch, patchouli, jasmine, rose',base:'musk, oakmoss, ambergris, vanilla',
+ scent:'Smoky birch and bright pineapple — bold, fresh and commanding. The benchmark every clone chases.',price:5000},
+{id:11,house:'creed',houseName:'Creed',name:'Silver Mountain Water',tier:'niche',seasons:['spring','summer'],occasions:['everyday','gym','beach'],accords:['aquatic','green tea','citrus'],
+ top:'bergamot, mandarin, green tea',heart:'blackcurrant, galbanum',base:'sandalwood, musk, petitgrain',
+ scent:'Cool blackcurrant and green tea over clean musk — glacial, fresh and invigorating.',price:5000},
+{id:12,house:'creed',houseName:'Creed',name:'Royal Oud',tier:'niche',seasons:['autumn','winter','spring'],occasions:['formal','office','date'],accords:['woody','oud','spicy'],
+ top:'lemon, bergamot, pink pepper',heart:'oud, cedar, galangal',base:'sandalwood, musk, angelica',
+ scent:'Bright, clean oud with cedar and pink pepper — regal but never heavy. Refined daytime luxury.',price:5000},
+{id:13,house:'creed',houseName:'Creed',name:'Millésime Impérial',tier:'niche',seasons:['summer','spring'],occasions:['beach','everyday','travel'],accords:['aquatic','citrus','musky'],
+ top:'lemon, bergamot, sea salt',heart:'iris, mandarin',base:'sandalwood, musk, marine notes',
+ scent:'Salty-sweet citrus over soft musk — sun-drenched Mediterranean luxury. Effortlessly elegant.',price:5000},
+
+{id:14,house:'amouage',houseName:'Amouage',name:'Interlude Man',tier:'niche',noir:true,seasons:['autumn','winter'],occasions:['formal','night-out','date'],accords:['smoky','incense','spicy'],
+ top:'bergamot, oregano, pepper',heart:'amber, frankincense, cistus, opoponax',base:'leather, sandalwood, oud, patchouli, musk',
+ scent:'Controlled chaos — billowing incense and resin over leather and oud. Bold, smoky and utterly distinctive.',price:5000},
+{id:15,house:'amouage',houseName:'Amouage',name:'Reflection Woman',tier:'niche',seasons:['spring','summer'],occasions:['everyday','office','formal'],accords:['white floral','aromatic','powdery'],
+ top:'freesia, rosemary',heart:'jasmine sambac, orange blossom, ylang-ylang, rose',base:'sandalwood, cedar, musk',
+ scent:'Creamy, radiant white florals over soft sandalwood — serene, elegant and beautifully composed.',price:5000},
+{id:16,house:'amouage',houseName:'Amouage',name:'Beloved Woman',tier:'niche',seasons:['spring','autumn'],occasions:['formal','date','everyday'],accords:['floral','chypre','vintage'],
+ top:'aldehydes, bergamot, pink pepper',heart:'rose, jasmine, orris, lily',base:'oakmoss, vetiver, leather, amber, civet',
+ scent:'A glamorous retro chypre — opulent florals over mossy, animalic depth. Old-world Hollywood elegance.',price:5000},
+
+{id:17,house:'byredo',houseName:'Byredo',name:"Bal d'Afrique",tier:'cult',seasons:['summer','autumn'],occasions:['everyday','date','travel'],accords:['floral','citrus','woody'],
+ top:'bergamot, lemon, neroli, bucchu',heart:'violet, jasmine, cyclamen, marigold',base:'amber, musk, vetiver, moss, cedar',
+ scent:'Warm golden florals and citrus over earthy vetiver — vintage, sunlit and quietly romantic.',price:4750},
+{id:18,house:'byredo',houseName:'Byredo',name:'Blanche',tier:'cult',seasons:['spring','summer'],occasions:['everyday','office','gym'],accords:['white floral','powdery','musk'],
+ top:'aldehydes, pink pepper',heart:'rose, peony, neroli',base:'white musk, sandalwood, woods',
+ scent:'Minimalist and pristine — soapy white musk and rose. The scent of clean skin and fresh linen.',price:4350},
+{id:19,house:'byredo',houseName:'Byredo',name:'Gypsy Water',tier:'cult',noir:true,seasons:['all'],occasions:['everyday','travel','office'],accords:['woody','pine','vanilla'],
+ top:'bergamot, lemon, pepper, juniper',heart:'incense, pine needles, orris',base:'amber, vanilla, sandalwood',
+ scent:'Fresh pine and incense softened by vanilla and amber — bohemian, cosy and quietly addictive.',price:4550},
+{id:20,house:'byredo',houseName:'Byredo',name:'Mojave Ghost',tier:'cult',seasons:['summer','spring'],occasions:['everyday','beach','date'],accords:['woody','floral','musky'],
+ top:'ambrette, Jamaican nesberry',heart:'magnolia, violet, sandalwood',base:'cedar, chantilly musk, amber',
+ scent:'A soft, airy desert bloom — magnolia and sandalwood over clean musk. Subtle, ghostly and modern.',price:4450},
+
+{id:21,house:'xerjoff',houseName:'Xerjoff',name:'Naxos',tier:'niche',noir:true,seasons:['summer','spring','autumn'],occasions:['date','night-out','formal'],accords:['honey','tobacco','aromatic'],
+ top:'bergamot, lavender, lemon, honey',heart:'cinnamon, jasmine, tobacco, vanilla',base:'tonka, honey, vanilla, woods',
+ scent:'Luxurious honeyed tobacco and lavender over vanilla — sweet, sophisticated and Tuscan-warm.',price:5000},
+{id:22,house:'xerjoff',houseName:'Xerjoff',name:'40 Knots',tier:'niche',seasons:['summer','spring'],occasions:['everyday','beach','travel'],accords:['aquatic','woody','citrus'],
+ top:'sea notes, bergamot',heart:'neroli, geranium',base:'cedar, white musk, woods',
+ scent:'Clean salty marine air over soft woods — premium freshness with real depth. Salt spray, refined.',price:5000},
+
+{id:23,house:'initio',houseName:'Initio',name:'Oud for Greatness',tier:'niche',noir:true,seasons:['winter','autumn'],occasions:['formal','night-out','date'],accords:['oud','smoky','dark amber'],
+ top:'nutmeg, saffron',heart:'oud, lavender',base:'musk, sandalwood',
+ scent:'A smoky saffron-oud powerhouse — raw, magnetic and impossible to ignore. Main-character energy.',price:5000},
+{id:24,house:'initio',houseName:'Initio',name:'Atomic Rose',tier:'niche',seasons:['spring','summer'],occasions:['date','everyday','formal'],accords:['rose','musky','powdery'],
+ top:'saffron, blackcurrant',heart:'rose, magnolia',base:'musk, woods',
+ scent:'A radiant peppery rose over clean musk — modern, lush and unapologetically beautiful.',price:5000},
+{id:25,house:'initio',houseName:'Initio',name:'Side Effect',tier:'niche',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['tobacco','boozy','vanilla'],
+ top:'cinnamon, rum, saffron',heart:'tobacco, vanilla',base:'cedar, sandalwood, amber',
+ scent:'Boozy rum and sweet tobacco over warm amber — decadent, addictive and built for nightlife.',price:5000},
+
+{id:26,house:'dior',houseName:'Dior Privée',name:'Oud Ispahan',tier:'niche',noir:true,seasons:['autumn','winter'],occasions:['formal','night-out','date'],accords:['oud','rose','amber'],
+ top:'rose, oud',heart:'labdanum, patchouli',base:'sandalwood, saffron',
+ scent:'A rich rose-oud draped in resin and leather — opulent, dark and beautifully balanced.',price:5000},
+{id:27,house:'dior',houseName:'Dior Privée',name:'Granville',tier:'designer',seasons:['spring','summer'],occasions:['everyday','beach','travel'],accords:['citrus','floral','fresh'],
+ top:'lavandin, pine needles',heart:'rose, white floral',base:'white musk',
+ scent:'Breezy herbal-floral freshness — pine and lavender by the sea. Clean, airy and refined.',price:3900},
+{id:28,house:'dior',houseName:'Dior Privée',name:'Rose Kabuki',tier:'niche',seasons:['spring','summer'],occasions:['date','formal','everyday'],accords:['rose','fresh','powdery'],
+ top:'mint',heart:'rose',base:'white musk, woods',
+ scent:'A dewy, cool rose touched with mint — fresh, light and elegantly simple.',price:5000},
+
+{id:29,house:'ysl',houseName:'Yves Saint Laurent',name:'Libre',tier:'designer',seasons:['all'],occasions:['everyday','office','date'],accords:['floral','lavender','musky'],
+ top:'lavender, mandarin, blackcurrant, petitgrain',heart:'orange blossom, jasmine, lavender',base:'vanilla, musk, cedar, ambergris',
+ scent:'Lavender and orange blossom over warm vanilla — bold, modern and sexy-clean. Freedom in a bottle.',price:3200},
+{id:30,house:'ysl',houseName:'Yves Saint Laurent',name:'Y EDP',tier:'designer',seasons:['summer','spring','autumn'],occasions:['everyday','office','gym'],accords:['woody','aromatic','fresh'],
+ top:'apple, ginger, bergamot, sage',heart:'sage, juniper, geranium',base:'amberwood, tonka, cedar, vetiver, olibanum',
+ scent:'Fresh apple and sage over clean amberwood — crisp, masculine and effortlessly versatile.',price:2950},
+{id:31,house:'ysl',houseName:'Yves Saint Laurent',name:'MYSLF',tier:'designer',seasons:['all'],occasions:['everyday','date','office'],accords:['floral','woody','musky'],
+ top:'bergamot, orange blossom',heart:'orange blossom, mock orange',base:'ambrette, patchouli, woods',
+ scent:'Clean orange blossom over soft woods and musk — fresh, fluid and quietly modern.',price:3100},
+
+{id:32,house:'giorgio-armani',houseName:'Armani Privé',name:"Rose d'Arabie",tier:'niche',seasons:['all'],occasions:['formal','date','night-out'],accords:['rose','oud','oriental'],
+ top:'rose',heart:'oud, honey',base:'amber, musk, vanilla',
+ scent:'An opulent rose-oud sweetened with honey — lavish, warm and East-meets-West luxurious.',price:5000},
+{id:33,house:'giorgio-armani',houseName:'Armani Privé',name:'Pivoine Suzhou',tier:'niche',seasons:['spring','summer'],occasions:['everyday','date','office'],accords:['peony','aldehydic','powdery'],
+ top:'aldehydes, mandarin',heart:'peony, rose',base:'sandalwood, musk',
+ scent:'Airy aldehydic peony over soft sandalwood — refined, breezy and quietly elegant.',price:4800},
+
+{id:34,house:'jo-malone',houseName:'Jo Malone London',name:'Peony & Blush Suede',tier:'designer',seasons:['spring','summer'],occasions:['everyday','office','date'],accords:['floral','fruity','suede'],
+ top:'red apple',heart:'peony, rose, jasmine, gillyflower',base:'suede',
+ scent:'Soft peony and crisp apple over plush suede — light, pretty and quietly romantic.',price:3450},
+{id:35,house:'jo-malone',houseName:'Jo Malone London',name:'Wood Sage & Sea Salt',tier:'designer',seasons:['summer','spring'],occasions:['everyday','beach','gym'],accords:['aromatic','aquatic','earthy'],
+ top:'ambrette seeds',heart:'sea salt',base:'sage, woods',
+ scent:'Windswept sea salt and dry sage — minimalist, mineral and refreshingly unisex.',price:3300},
+{id:36,house:'jo-malone',houseName:'Jo Malone London',name:'Oud & Bergamot',tier:'designer',seasons:['autumn','winter'],occasions:['office','date','formal'],accords:['oud','citrus','woody'],
+ top:'bergamot, orange, lemon',heart:'cedar',base:'oud, amber, patchouli',
+ scent:'Bright citrus over a soft, polite oud — the most approachable, wearable oud you will meet.',price:3700},
+
+{id:37,house:'tauer',houseName:'Tauer Perfumes',name:"L'Air du Désert Marocain",tier:'cult',seasons:['autumn','winter'],occasions:['formal','travel','date'],accords:['amber','incense','spicy'],
+ top:'coriander, petitgrain, cumin, bergamot',heart:'jasmine, rose, cistus, cedar',base:'ambergris, amber, frankincense, vanilla, vetiver',
+ scent:'A vast, glowing amber-incense — the warmth of a Saharan dusk. A genuine cult masterpiece.',price:4050},
+
+{id:38,house:'margiela',houseName:'Maison Margiela',name:'Replica Jazz Club',tier:'cult',seasons:['autumn','winter'],occasions:['night-out','date','travel'],accords:['tobacco','boozy','vanilla'],
+ top:'pink pepper, neroli, lemon',heart:'rum, clary sage, vetiver',base:'tobacco, vanilla, styrax',
+ scent:'A smoky bar after midnight — rum, tobacco and vanilla. Warm, masculine and deeply cosy.',price:4200},
+{id:39,house:'margiela',houseName:'Maison Margiela',name:'Replica Flower Market',tier:'cult',seasons:['spring','summer'],occasions:['everyday','office','travel'],accords:['green floral','fresh','earthy'],
+ top:'green floral notes',heart:'peony, rose, lily-of-the-valley',base:'musk, woods',
+ scent:'Dewy cut flowers at dawn — fresh peony and rose with a watery-green lift. Paris in spring.',price:4000},
+{id:40,house:'margiela',houseName:'Maison Margiela',name:'Replica By the Fireplace',tier:'cult',noir:true,seasons:['autumn','winter'],occasions:['date','night-out','everyday'],accords:['smoky','gourmand','woody'],
+ top:'clove, pink pepper, orange',heart:'chestnut, guaiac, juniper',base:'vanilla, cashmeran, Peru balsam, woods',
+ scent:'Roasted chestnuts and woodsmoke wrapped in vanilla — the smell of a fire on a winter night.',price:4000},
+
+{id:41,house:'marly',houseName:'Parfums de Marly',name:'Pegasus',tier:'niche',noir:true,seasons:['summer','spring','autumn'],occasions:['everyday','office','date'],accords:['almond','vanilla','woody'],
+ top:'bergamot, bitter almond',heart:'heliotrope, jasmine',base:'vanilla, sandalwood, amberwood, musk',
+ scent:'Creamy almond and heliotrope over smooth vanilla-sandalwood — silky, sweet and universally loved.',price:5000},
+{id:42,house:'marly',houseName:'Parfums de Marly',name:'Layton',tier:'niche',noir:true,seasons:['all'],occasions:['office','everyday','date'],accords:['apple','spicy','vanilla'],
+ top:'apple, bergamot, mandarin, lavender',heart:'geranium, violet, jasmine',base:'vanilla, sandalwood, guaiac, cardamom, pepper',
+ scent:'Spicy apple and lavender over warm vanilla — radiant, versatile and an effortless signature scent.',price:5000},
+{id:43,house:'marly',houseName:'Parfums de Marly',name:'Delina',tier:'niche',seasons:['spring','summer','autumn'],occasions:['date','formal','everyday'],accords:['rose','fruity','powdery'],
+ top:'rhubarb, litchi, bergamot',heart:'Turkish rose, peony, lily, nymphea',base:'vanilla, musk, cashmeran, incense, vetiver',
+ scent:'Powdery rose and rhubarb over soft vanilla — feminine, elegant and quietly addictive.',price:5000},
+
+{id:44,house:'chanel',houseName:'Chanel Les Exclusifs',name:'Sycomore',tier:'niche',noir:true,seasons:['autumn','winter'],occasions:['office','everyday','formal'],accords:['smoky vetiver','woody','dry'],
+ top:'aldehydes, pink pepper',heart:'cypress, juniper, sandalwood, violet',base:'vetiver, tobacco, olibanum',
+ scent:'Smoky, dry vetiver with aristocratic restraint — bare winter trees and quiet smoke. Effortlessly chic.',price:5000},
+{id:45,house:'chanel',houseName:'Chanel Les Exclusifs',name:'Jersey',tier:'niche',seasons:['spring','summer','autumn'],occasions:['everyday','gym','beach'],accords:['lavender','vanilla','fougère'],
+ top:'lavender',heart:'jasmine, iris',base:'vanilla, white musk, sandalwood',
+ scent:'Soft lavender melting into cosy vanilla — comforting, clean and beautifully understated.',price:4700},
+];
+
+/* HOUSE LIST (auto-derived + ordered) */
+function buildHouseList(){
+  const map={};
+  PERFUMES.forEach(p=>{ if(!map[p.house]) map[p.house]=p.houseName; });
+  return Object.keys(map).map(k=>({key:k,name:map[k]})).sort((a,b)=>a.name.localeCompare(b.name));
+}
+
+/* ===== STATE ===== */
+let activeMode='season',activeSeasonF='all',activeHouseF='all',activeOccF='all',activeSearch='',sortOrder='default';
+let selectedSeasons=[],selectedOccs=[],accordTags=[],noirSelected=false;
+
+/* ===== INIT ===== */
+function init(){
+  const row=document.getElementById('house-chips');
+  buildHouseList().forEach(h=>{
+    const b=document.createElement('button');
+    b.className='chip';b.dataset.house=h.key;b.textContent=h.name;
+    b.onclick=()=>filterChip(b,'house',h.key);
+    row.appendChild(b);
+  });
+  render();
+}
+
+function setMode(mode){
+  activeMode=mode;
+  ['season','house','search'].forEach(m=>{
+    const panel=document.getElementById('panel-'+m);
+    if(panel) panel.style.display=(m===mode)?'':'none';
+  });
+  ['season','house','search','noir'].forEach(m=>{
+    document.getElementById('tab-'+m).classList.toggle('active',m===mode);
+  });
+  document.getElementById('noir-intro').classList.toggle('show',mode==='noir');
+  if(mode==='search') document.getElementById('search-input').focus();
+  render();
+}
+
+function filterChip(el,type,val){
+  const r=el.closest('.frow');
+  r.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  if(type==='season') activeSeasonF=val;
+  if(type==='house') activeHouseF=val;
+  render();
+}
+function filterOcc(el,val){
+  el.closest('.orow').querySelectorAll('.ochip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');activeOccF=val;render();
+}
+function doSearch(v){activeSearch=v.toLowerCase();render();}
+function doSort(v){sortOrder=v;render();}
+
+function getFiltered(){
+  let list=PERFUMES.filter(p=>{
+    if(activeMode==='noir' && !p.noir) return false;
+    if(activeMode==='season' && activeSeasonF!=='all'){ if(!p.seasons.includes(activeSeasonF)&&!p.seasons.includes('all')) return false; }
+    if(activeMode==='house' && activeHouseF!=='all'){ if(p.house!==activeHouseF) return false; }
+    if(activeMode==='search' && activeSearch){
+      const hay=[p.name,p.houseName,p.scent,p.top,p.heart,p.base,...p.accords,...p.occasions,...p.seasons].join(' ').toLowerCase();
+      if(!hay.includes(activeSearch)) return false;
+    }
+    if(activeOccF!=='all' && !p.occasions.includes(activeOccF)) return false;
+    return true;
+  });
+  if(sortOrder==='price-asc') list.sort((a,b)=>a.price-b.price);
+  if(sortOrder==='price-desc') list.sort((a,b)=>b.price-a.price);
+  if(sortOrder==='name-asc') list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sortOrder==='house-asc') list.sort((a,b)=>a.houseName.localeCompare(b.houseName));
+  return list;
+}
+
+const OCC_LABEL={'night-out':'Night Out','office':'Office','everyday':'Everyday','date':'Date Night','formal':'Formal','gym':'Sport','beach':'Beach','travel':'Travel'};
+const SS={summer:'ss-summer',winter:'ss-winter',spring:'ss-spring',autumn:'ss-autumn'};
+
+function seasonClass(s){ if(s.includes('all')||s.length>=4) return 'ss-all'; for(const x of ['winter','summer','autumn','spring']) if(s.includes(x)) return SS[x]; return 'ss-all'; }
+function seasonLabel(s){ if(s.includes('all')||s.length>=4) return 'Year-Round'; return s.map(x=>x[0].toUpperCase()+x.slice(1)).join(' · '); }
+
+function renderCard(p,i){
+  const tierLabel=p.tier==='niche'?'Niche':p.tier==='cult'?'Cult':'Designer';
+  const occHtml=p.occasions.map(o=>`<span class="otag">${OCC_LABEL[o]||o}</span>`).join('');
+  const accHtml=p.accords.map(a=>`<span class="accord">${a}</span>`).join('');
+  const noirBadge=p.noir?`<span class="noir-badge">NOIR Collection</span>`:'';
+  const pyr=`<div class="pyramid">
+      ${p.top?`<div class="pyr"><span class="pyr-lab">Top</span><span class="pyr-notes">${p.top}</span></div>`:''}
+      ${p.heart?`<div class="pyr"><span class="pyr-lab">Heart</span><span class="pyr-notes">${p.heart}</span></div>`:''}
+      ${p.base?`<div class="pyr"><span class="pyr-lab">Base</span><span class="pyr-notes">${p.base}</span></div>`:''}
+    </div>`;
+  return `<div class="card ${p.noir?'noir':''}" style="animation-delay:${Math.min(i*0.03,0.5)}s">
+    <span class="sheen"></span>
+    <div class="stripe ${seasonClass(p.seasons)}"></div>
+    <div class="body">
+      <p class="house">${p.houseName}</p>
+      <h2 class="name">${p.name}</h2>
+      ${noirBadge}
+      <div class="accords">${accHtml}</div>
+      <p class="scent">${p.scent}</p>
+      ${pyr}
+      <div class="otags">${occHtml}</div>
+      <div class="foot">
+        <div>
+          <p class="plabel">Retail Price</p>
+          <p class="price">KES ${p.price.toLocaleString()}</p>
+          <p class="psub">Free delivery included</p>
+        </div>
+        <span class="tier t-${p.tier}">${tierLabel}</span>
+      </div>
+    </div>
+    <span class="season-badge">${seasonLabel(p.seasons)}</span>
+  </div>`;
+}
+
+function render(){
+  const f=getFiltered();
+  document.getElementById('count-num').textContent=f.length;
+  const cat=document.getElementById('catalogue');
+  if(!f.length){ cat.innerHTML=`<div class="no-results"><p class="nr-title">Nothing found</p><p class="nr-sub">Try different filters</p></div>`; return; }
+  cat.innerHTML=f.map((p,i)=>renderCard(p,i)).join('');
+}
+
+/* ===== MODAL ===== */
+function openModal(){document.getElementById('overlay').classList.add('open');resetForm();}
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+function resetForm(){
+  ['f-name','f-house','f-cost','f-top','f-heart','f-base','f-scent'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-tier').value='';
+  document.querySelectorAll('#overlay .chip, #occ-picker .ochip').forEach(c=>c.classList.remove('active'));
+  accordTags=[];selectedSeasons=[];selectedOccs=[];noirSelected=false;
+  document.getElementById('noir-toggle').classList.remove('on');
+  renderAccordPills();
+  document.getElementById('preview-price').textContent='—';
+}
+
+function toggleSeason(btn,val){
+  document.getElementById('chip-all-season').classList.remove('active');
+  const i=selectedSeasons.indexOf(val);
+  if(i>-1){selectedSeasons.splice(i,1);btn.classList.remove('active');}
+  else{selectedSeasons.push(val);btn.classList.add('active');}
+}
+function toggleAllSeason(btn){
+  const on=!btn.classList.contains('active');
+  document.querySelectorAll('#overlay .frow .chip:not(#chip-all-season)').forEach(c=>c.classList.remove('active'));
+  selectedSeasons=[];btn.classList.toggle('active',on);
+}
+function toggleOcc(btn,val){
+  const i=selectedOccs.indexOf(val);
+  if(i>-1){selectedOccs.splice(i,1);btn.classList.remove('active');}
+  else{selectedOccs.push(val);btn.classList.add('active');}
+}
+function toggleNoir(){
+  noirSelected=!noirSelected;
+  document.getElementById('noir-toggle').classList.toggle('on',noirSelected);
+}
+
+function handleTagKey(e){
+  if(e.key==='Enter'||e.key===','){
+    e.preventDefault();
+    const v=e.target.value.replace(',','').trim();
+    if(v&&!accordTags.includes(v)){accordTags.push(v);renderAccordPills();}
+    e.target.value='';
+  }
+}
+function removeTag(v){accordTags=accordTags.filter(t=>t!==v);renderAccordPills();}
+function renderAccordPills(){
+  const wrap=document.getElementById('accord-wrap'),input=document.getElementById('accord-input');
+  wrap.innerHTML='';
+  accordTags.forEach(t=>{
+    const pill=document.createElement('span');pill.className='tpill';
+    pill.innerHTML=`${t}<button type="button" onclick="removeTag('${t.replace(/'/g,"\\'")}')">×</button>`;
+    wrap.appendChild(pill);
+  });
+  wrap.appendChild(input);
+}
+
+function updatePreview(){
+  const cost=parseFloat(document.getElementById('f-cost').value);
+  const tier=document.getElementById('f-tier').value;
+  const price=calcPrice(cost,tier);
+  document.getElementById('preview-price').textContent=price?'KES '+price.toLocaleString():'—';
+}
+
+function addPerfume(){
+  const name=document.getElementById('f-name').value.trim();
+  const houseName=document.getElementById('f-house').value.trim();
+  const tier=document.getElementById('f-tier').value;
+  const cost=parseFloat(document.getElementById('f-cost').value);
+  const top=document.getElementById('f-top').value.trim();
+  const heart=document.getElementById('f-heart').value.trim();
+  const base=document.getElementById('f-base').value.trim();
+  const scent=document.getElementById('f-scent').value.trim();
+
+  if(!name||!houseName||!tier||!cost){showToast('Please fill all required fields');return;}
+
+  const seasons=document.getElementById('chip-all-season').classList.contains('active')?['all']:(selectedSeasons.length?[...selectedSeasons]:['all']);
+  const occasions=selectedOccs.length?[...selectedOccs]:['everyday'];
+  const accords=accordTags.length?[...accordTags]:['unspecified'];
+  const price=calcPrice(cost,tier);
+  const houseKey=houseName.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+
+  PERFUMES.unshift({
+    id:Date.now(),house:houseKey,houseName,name,tier,noir:noirSelected,
+    seasons,occasions,accords,
+    top:top||'',heart:heart||'',base:base||'',
+    scent:scent||'A new addition to the catalogue.',price
+  });
+
+  const row=document.getElementById('house-chips');
+  if(![...row.querySelectorAll('.chip')].some(c=>c.dataset.house===houseKey)){
+    const b=document.createElement('button');
+    b.className='chip';b.dataset.house=houseKey;b.textContent=houseName;
+    b.onclick=()=>filterChip(b,'house',houseKey);
+    row.appendChild(b);
+  }
+
+  closeModal();render();
+  showToast(name+(noirSelected?' added to NOIR Collection':' added to catalogue'));
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+init();
+</script>
+</body>
+</html>
