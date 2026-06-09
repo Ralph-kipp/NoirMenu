@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOIR — The Fragrance Atelier</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#07070a;
@@ -15,20 +15,20 @@
   --border-lt:#39394550;
   --border-hi:#4a4a58;
   --platinum:#d4d4dc;
-  --platinum-dim:#8d8d99;
+  --platinum-dim:#c0c0cc;
   --silver:#ebebf1;
   --champagne:#c8a96a;
   --champagne-lt:#e0c890;
-  --champagne-dim:#8a7038;
+  --champagne-dim:#b89448;
   --crimson:#a23246;
   --crimson-dim:#6e1f2c;
   --oxblood:#5a1a24;
   --text:#d6d6dd;
-  --text-dim:#82828e;
-  --mist:#5b5b67;
-  --serif:'Cormorant Garamond','Hoefler Text',Georgia,'Times New Roman',serif;
+  --text-dim:#b0b0be;
+  --mist:#9a9aa6;
+  --serif:'Lora',Georgia,'Times New Roman',serif;
   --display:'Cinzel','Trajan Pro',Georgia,serif;
-  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+  --sans:'Inter','Helvetica Neue',Arial,sans-serif;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -777,17 +777,114 @@ footer{border-top:1px solid var(--border);text-align:center;padding:2rem;
   .catalogue{grid-template-columns:1fr;}
   .fgrid{grid-template-columns:1fr;}
   .brand{font-size:2.8rem;}
-  .tab{padding:10px 14px;font-size:9.5px;}
+  .tab{padding:10px 14px;font-size:12px;}
   .intro-accordions,.discovery-panel{padding-left:1rem;padding-right:1rem;}
   .info-tap{display:inline-flex;align-self:flex-start;}
   .card:hover .hover-profile{max-height:0;opacity:0;}
   .card.show-profile .hover-profile{max-height:140px;opacity:1;}
   .detail-grid,.performance-grid{grid-template-columns:1fr;}
-  .cart-toggle{top:10px;right:10px;padding:9px 11px;font-size:9px;letter-spacing:0.18em;}
+  .cart-toggle{top:10px;right:10px;padding:9px 11px;font-size:11px;letter-spacing:0.18em;}
   .cart-drawer{width:100vw;}
   .checkout-fields{grid-template-columns:1fr;}
   .toast{max-width:calc(100vw - 24px);white-space:normal;text-align:center;}
 }
+
+/* ===== READABILITY — legible sizes at Noir scale ===== */
+body{font-size:16px;}
+.delivery{font-size:13px;letter-spacing:0.2em;}
+.cart-toggle{font-size:13px;letter-spacing:0.2em;padding:12px 18px;}
+.eyebrow{font-size:12px;letter-spacing:0.42em;}
+.ctrl-label{font-size:12px;letter-spacing:0.36em;}
+.tab{font-size:14px;letter-spacing:0.22em;}
+.chip{font-size:13px;letter-spacing:0.16em;padding:8px 20px;}
+.sublabel{font-size:12px;letter-spacing:0.3em;}
+.ochip{font-size:12px;letter-spacing:0.14em;padding:7px 16px;}
+.lux-chip{font-size:12px;letter-spacing:0.16em;padding:9px 16px;}
+.filter-heading{font-size:12px;letter-spacing:0.3em;}
+.house{font-size:11px;letter-spacing:0.32em;}
+.name{font-size:1.75rem;}
+.noir-badge{font-size:11px;letter-spacing:0.2em;padding:4px 10px;}
+.inspired-badge{font-size:11px;letter-spacing:0.18em;padding:4px 10px;}
+.card-inspired-badge{font-size:11px;letter-spacing:0.18em;padding:4px 10px;}
+.spec-line{font-size:12px;letter-spacing:0.2em;}
+.card-spec-visible{font-size:12px;letter-spacing:0.2em;}
+.accord{font-size:11px;letter-spacing:0.12em;padding:3px 10px;}
+.scent{font-size:15px;line-height:1.7;}
+.card-scent-preview{font-size:15px;line-height:1.65;}
+.about-label{font-size:11px;letter-spacing:0.24em;}
+.about-name{font-size:1.15rem;}
+.meta-label{font-size:11px;letter-spacing:0.2em;}
+.meta-value{font-size:13px;letter-spacing:0.12em;}
+.wearer-profile{font-size:1.05rem;line-height:1.6;}
+.expand-toggle{font-size:12px;letter-spacing:0.2em;padding:11px 13px;}
+.detail-title{font-size:11px;letter-spacing:0.28em;}
+.detail-copy{font-size:1.05rem;line-height:1.65;}
+.pyr-lab{font-size:11px;letter-spacing:0.14em;}
+.pyr-notes{font-size:14px;line-height:1.55;}
+.otag{font-size:11px;letter-spacing:0.16em;padding:3px 9px;}
+.plabel{font-size:11px;letter-spacing:0.28em;}
+.price{font-size:1.85rem;}
+.psub{font-size:11px;}
+.tier{font-size:11px;letter-spacing:0.22em;padding:5px 11px;}
+.season-badge{font-size:11px;letter-spacing:0.18em;padding:4px 10px;}
+.count{font-size:13px;letter-spacing:0.18em;}
+.sortsel{font-size:12px;letter-spacing:0.1em;padding:8px 14px;}
+.card-cart-btn{font-size:12px;letter-spacing:0.22em;padding:11px 14px;}
+.perf-meter span{font-size:11px;letter-spacing:0.14em;}
+.cart-name{font-size:1.15rem;}
+.cart-price,.cart-line{font-size:12px;letter-spacing:0.14em;}
+.qty-value{font-size:13px;letter-spacing:0.12em;}
+.cart-remove{font-size:11px;letter-spacing:0.18em;}
+.checkout-field label{font-size:11px;letter-spacing:0.22em;}
+.checkout-input{font-size:1.05rem;}
+.cart-subtotal span:first-child{font-size:12px;letter-spacing:0.22em;}
+.cart-subtotal span:last-child{font-size:1.85rem;}
+.checkout-btn{font-size:12px;letter-spacing:0.18em;padding:14px 16px;}
+.foot-text{font-size:12px;letter-spacing:0.28em;}
+.foot-disclaimer{font-size:13px;line-height:1.7;}
+.flabel{font-size:12px;letter-spacing:0.28em;}
+.tinput{font-size:14px;}
+.thint{font-size:11px;}
+.detail-house-label{font-size:12px;letter-spacing:0.36em;}
+.detail-name{font-size:1.9rem;}
+.detail-price{font-size:2rem;}
+.detail-spec-tag{font-size:12px;letter-spacing:0.2em;}
+.detail-section-title{font-size:11px;letter-spacing:0.28em;}
+.detail-vtag{font-size:11px;letter-spacing:0.13em;padding:3px 10px;}
+.detail-info-cell p:first-child{font-size:11px;letter-spacing:0.22em;}
+.detail-info-cell p:last-child{font-size:13px;}
+.detail-scent-line{font-size:1.1rem;line-height:1.7;}
+.card-affil-note{font-size:12px;letter-spacing:0.08em;}
+.affiliation-note{font-size:12px;letter-spacing:0.1em;}
+.card-vibe-tag{font-size:11px;letter-spacing:0.12em;padding:3px 9px;}
+.ack-id{font-size:12px;letter-spacing:0.18em;}
+.ack-copy{font-size:1.05rem;line-height:1.6;}
+.secondary-btn{font-size:11px;letter-spacing:0.16em;padding:9px 12px;}
+.noir-toggle .lbl{font-size:12px;letter-spacing:0.22em;}
+.noir-toggle .desc{font-size:1rem;line-height:1.5;}
+.mode-nav-label{font-size:14px;letter-spacing:0.26em;}
+.envelope-eyebrow{font-size:1rem;letter-spacing:0.32em;}
+.envelope-story-body{font-size:1.1rem;line-height:1.8;}
+.brand-accordion summary{font-size:1.1rem;letter-spacing:0.16em;}
+.accordion-copy p{font-size:1.1rem;line-height:1.7;}
+.accordion-list{font-size:1.1rem;}
+.preview-lab{font-size:12px;letter-spacing:0.3em;}
+.preview-val{font-size:1.85rem;}
+.preview-note{font-size:12px;}
+.btn-cancel,.btn-add{font-size:12px;letter-spacing:0.22em;padding:11px 26px;}
+.mtitle{font-size:1.1rem;letter-spacing:0.14em;}
+.ack-title{font-size:1.05rem;}
+.nr-sub{font-size:13px;letter-spacing:0.22em;}
+.nr-title{font-size:2.1rem;}
+.noir-intro-title{font-size:1.1rem;letter-spacing:0.16em;}
+.noir-intro-text{font-size:1.1rem;line-height:1.7;}
+.info-tap{font-size:11px;letter-spacing:0.18em;}
+.cart-title{font-size:1.1rem;letter-spacing:0.16em;}
+.brand-sub{font-size:1.35rem;}
+.discovery-sub{font-size:1.1rem;line-height:1.7;}
+.detail-list{font-size:1rem;}
+.finput,.fselect,.ftext{font-size:1.05rem;padding:10px 6px;}
+.search-input{font-size:1.3rem;}
 </style>
 </head>
 <body>
@@ -1431,6 +1528,79 @@ let PERFUMES=[
 {id:45,house:'chanel',houseName:'Chanel Les Exclusifs',name:'Jersey',tier:'niche',genuine:false,size:'50ml',concentration:'EDP',gender:'women',seasons:['spring','summer','autumn'],occasions:['everyday','gym','beach'],accords:['lavender','vanilla','fougère'],
  top:'lavender',heart:'jasmine, iris',base:'vanilla, white musk, sandalwood',
  scent:'Soft lavender melting into cosy vanilla — comforting, clean and beautifully understated.',price:4700},
+
+/* ---------- NEW ARRIVALS ---------- */
+{id:200,house:'afnan',houseName:'Afnan',name:'9PM EDT',tier:'designer',genuine:true,size:'100ml',concentration:'EDT',gender:'men',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['sweet','boozy','vanilla'],
+ top:'bergamot, davana, apple, pink pepper',heart:'jasmine, lavender, birch',base:'vanilla, amber, tonka bean, cedar, musk',
+ scent:'The viral sweet-amber bomb — boozy vanilla over warm birch and tonka. Impossibly addictive night-out energy for the price.',price:1950},
+
+{id:201,house:'riffs',houseName:'RIFFS',name:'No.1 EDP',tier:'designer',genuine:true,size:'100ml',concentration:'EDP',gender:'men',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['spicy','woody','amber'],
+ top:'bergamot, saffron, pink pepper',heart:'rose, oud, cedar',base:'amber, sandalwood, musk, vanilla',
+ scent:'Bold spice and saffron over rich cedar and amber — full-bodied and commanding. A strong, confident signature.',price:1800},
+
+{id:202,house:'azzaro',houseName:'Azzaro',name:'Chrome EDT',tier:'designer',genuine:false,size:'100ml',concentration:'EDT',gender:'men',seasons:['summer','spring','autumn'],occasions:['everyday','office','gym'],accords:['aquatic','citrus','aromatic'],
+ top:'bergamot, lemon, rosemary, neroli',heart:'jasmine, lily-of-the-valley, cyclamen, coriander',base:'oakmoss, tonka, musk, cedar',
+ scent:'The quintessential fresh-aquatic — clean citrus and florals over soft musk. Polished everyday masculinity.',price:2600},
+
+{id:203,house:'azzaro',houseName:'Azzaro',name:'Pour Homme EDT',tier:'designer',genuine:false,size:'100ml',concentration:'EDT',gender:'men',seasons:['spring','summer','autumn'],occasions:['everyday','office','formal'],accords:['fougère','aromatic','anise'],
+ top:'anise, lavender, bergamot, basil, lemon',heart:'oakmoss, jasmine, carnation, vetiver, rose',base:'cedar, sandalwood, amber, vanilla',
+ scent:'The timeless fougère classic — anise and lavender over oakmoss and cedar. Effortless barbershop sophistication.',price:2500},
+
+{id:204,house:'rave',houseName:'RAVE',name:'Unlimited Sport EDT',tier:'designer',genuine:true,size:'100ml',concentration:'EDT',gender:'men',seasons:['summer','spring'],occasions:['everyday','gym','office'],accords:['aquatic','fresh','citrus'],
+ top:'bergamot, lemon, mint',heart:'geranium, lavender',base:'musk, cedar, amberwood',
+ scent:'Clean marine freshness over soft woods — sporty, breezy and incredibly easy to wear daily.',price:1600},
+
+{id:205,house:'lv',houseName:'Louis Vuitton',name:'Ombre Nomade EDP',tier:'niche',genuine:false,size:'100ml',concentration:'EDP',gender:'unisex',noir:true,seasons:['autumn','winter'],occasions:['formal','night-out','date'],accords:['oud','incense','woody'],
+ top:'oud, birch',heart:'rose, raspberry',base:'oud, labdanum, benzoin, incense, musk',
+ scent:'A dark smoky oud dusted with rose and incense — brooding, majestic and utterly captivating. LV at its most raw.',price:5000},
+
+{id:206,house:'lv',houseName:'Louis Vuitton',name:'Coeur Battant EDP',tier:'niche',genuine:false,size:'100ml',concentration:'EDP',gender:'women',seasons:['spring','summer'],occasions:['date','everyday','formal'],accords:['white floral','aquatic','musky'],
+ top:'sea notes, cedar',heart:'rose, peony',base:'white musk, sandalwood',
+ scent:'Ocean air meeting a dewy rose — luminous, fresh and effortlessly feminine. Sea-spray elegance.',price:4800},
+
+{id:207,house:'mercedes',houseName:'Mercedes-Benz',name:'Club Black EDT',tier:'designer',genuine:false,size:'100ml',concentration:'EDT',gender:'men',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['woody','leather','dark'],
+ top:'bergamot, black tea, cardamom',heart:'cedar, black pepper, suede',base:'vetiver, oak, leather',
+ scent:'Dark tea and suede over dry cedar and vetiver — understated, masculine and quietly powerful.',price:2200},
+
+{id:208,house:'french-avenue',houseName:'French Avenue',name:'Pour Femme EDP',tier:'designer',genuine:true,size:'100ml',concentration:'EDP',gender:'women',seasons:['spring','summer','autumn'],occasions:['everyday','date','office'],accords:['floral','fresh','musky'],
+ top:'bergamot, lemon, neroli',heart:'rose, jasmine, lily',base:'white musk, sandalwood, amber',
+ scent:'Bright florals over clean musk — soft, feminine and beautifully wearable from morning to evening.',price:1750},
+
+{id:209,house:'swiss-arabian',houseName:'Swiss Arabian',name:'Shaghaf Oud Aswad EDP',tier:'designer',genuine:true,size:'50ml',concentration:'EDP',gender:'unisex',noir:true,seasons:['autumn','winter'],occasions:['formal','night-out','date'],accords:['oud','smoky','amber'],
+ top:'saffron, bergamot',heart:'oud, rose, leather',base:'amber, patchouli, musk, sandalwood',
+ scent:'Smoky saffron-oud over rich leather and amber — assertive, Arabian and deeply luxurious.',price:2700},
+
+{id:210,house:'swiss-arabian',houseName:'Swiss Arabian',name:'Wajd EDP',tier:'designer',genuine:true,size:'50ml',concentration:'EDP',gender:'unisex',seasons:['all'],occasions:['everyday','office','date'],accords:['rose','oud','musky'],
+ top:'bergamot, rose',heart:'oud, jasmine, musk',base:'sandalwood, amber, vanilla',
+ scent:'A soft rose-oud hybrid — approachable, clean and finely balanced. Everyday Arabic luxury.',price:2400},
+
+{id:211,house:'superz',houseName:'Superz',name:'Gold EDP',tier:'designer',genuine:true,size:'100ml',concentration:'EDP',gender:'unisex',seasons:['autumn','winter'],occasions:['night-out','date','formal'],accords:['sweet','amber','oriental'],
+ top:'bergamot, cinnamon, pepper',heart:'rose, oud, jasmine',base:'amber, vanilla, musk, sandalwood',
+ scent:'Rich amber and oriental spice — warm, enveloping and built to command attention.',price:1600},
+
+{id:212,house:'roja',houseName:'Roja Parfums',name:'Elysium Pour Homme Parfum',tier:'niche',genuine:false,size:'50ml',concentration:'Parfum',gender:'men',noir:true,seasons:['all'],occasions:['formal','office','date'],accords:['citrus','aromatic','clean'],
+ top:'bergamot, grapefruit, lemon, mandarin',heart:'cardamom, pink pepper, orris, rose, lavender',base:'cedarwood, vetiver, ambergris, musk',
+ scent:"A crystalline burst of citrus over clean woods and ambergris — god-tier freshness from the world's greatest perfumer.",price:5000},
+
+{id:213,house:'roja',houseName:'Roja Parfums',name:'Enigma Pour Homme Parfum',tier:'niche',genuine:false,size:'50ml',concentration:'Parfum',gender:'men',seasons:['autumn','winter'],occasions:['formal','date','night-out'],accords:['leather','tobacco','amber'],
+ top:'bergamot, aldehydes, cardamom',heart:'orris, rose, leather, cedar',base:'tobacco, benzoin, amber, musk, oakmoss',
+ scent:'Imperious tobacco-leather over rich resin and orris — brooding, vintage and impossibly refined.',price:5000},
+
+{id:214,house:'lv',houseName:'Louis Vuitton',name:'Attrape-Rêves EDP',tier:'niche',genuine:false,size:'100ml',concentration:'EDP',gender:'women',seasons:['spring','summer','autumn'],occasions:['date','everyday','formal'],accords:['white floral','fruity','soft'],
+ top:'mandarin, peach, litchi',heart:'peony, rose, jasmine, lily-of-the-valley',base:'white musk, sandalwood, amber',
+ scent:'A dreamlike cloud of peony and litchi over luminous musk — joyful, feminine and beautifully light.',price:5000},
+
+{id:215,house:'rasasi',houseName:'Rasasi',name:'Rayhaan EDP',tier:'designer',genuine:true,size:'75ml',concentration:'EDP',gender:'unisex',seasons:['autumn','winter','spring'],occasions:['formal','night-out','date'],accords:['rose','oud','woody'],
+ top:'bergamot, saffron, rose',heart:'oud, sandalwood, amber',base:'musk, vetiver, cedar, labdanum',
+ scent:'Deep rose over smoky oud and amber — rich, Middle-Eastern and the perfect balance of floral and wood.',price:2200},
+
+{id:216,house:'dries-van-noten',houseName:'Dries Van Noten',name:'Dries Van Noten EDP',tier:'niche',genuine:false,size:'100ml',concentration:'EDP',gender:'unisex',noir:true,seasons:['autumn','winter'],occasions:['formal','date','night-out'],accords:['rose','leather','oriental'],
+ top:'rose, bergamot, aldehydes',heart:'rose, sandalwood, resins',base:'benzoin, patchouli, oud, amber',
+ scent:'A smoldering rose-oud wrapped in resins and old leather — cinematic, complex and steeped in dark glamour.',price:4800},
+
+{id:217,house:'roja',houseName:'Roja Parfums',name:'Vana Gloria Parfum',tier:'niche',genuine:false,size:'50ml',concentration:'Parfum',gender:'women',seasons:['spring','summer'],occasions:['date','formal','everyday'],accords:['floral','powdery','white musk'],
+ top:'bergamot, grapefruit, peach',heart:'rose, jasmine, ylang-ylang, iris',base:'sandalwood, musk, amber, white woods',
+ scent:'A radiant, powdery floral — lush rose and iris over soft sandalwood. The definition of dressed femininity.',price:5000},
 ];
 
 /* HOUSE LIST (auto-derived + ordered) */
