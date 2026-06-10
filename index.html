@@ -949,37 +949,108 @@ body{font-size:16px;}
 }
 @keyframes scrollPulse{0%,100%{opacity:0.35;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.12);}}
 
-/* ======= SCENE BREAK — full-width atmospheric image strip ======= */
-.scene-break{
-  width:100%;position:relative;overflow:hidden;z-index:2;
-  margin:2.5rem 0 0;
+/* ======= TOP SELLERS CAROUSEL ======= */
+.topsellers{
+  max-width:1060px;margin:0 auto;padding:3.5rem 2rem 2rem;position:relative;z-index:2;
+  border-top:1px solid var(--border);
 }
-.scene-break img{
-  width:100%;height:340px;object-fit:cover;object-position:center 30%;
-  filter:brightness(0.62) contrast(1.08);
-  display:block;
+.ts-eyebrow{
+  font-family:var(--sans);font-weight:200;font-size:11px;
+  letter-spacing:0.6em;color:var(--champagne);text-transform:uppercase;
+  text-align:center;margin-bottom:0.9rem;
 }
-.scene-break-label{
-  position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);
-  font-family:var(--serif);font-style:italic;font-size:1rem;
-  color:rgba(212,212,220,0.8);letter-spacing:0.06em;
-  text-shadow:0 2px 10px rgba(0,0,0,0.9);white-space:nowrap;pointer-events:none;
+.ts-title{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(1.4rem,4vw,2.2rem);letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--silver);text-align:center;margin-bottom:1rem;
 }
+.ts-orn{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-bottom:2.5rem;}
+.ts-orn-line{height:1px;width:60px;background:linear-gradient(to right,transparent,var(--champagne-dim));}
+.ts-orn-line.r{background:linear-gradient(to left,transparent,var(--champagne-dim));}
+.ts-orn-d{width:5px;height:5px;background:var(--champagne);transform:rotate(45deg);flex-shrink:0;
+  box-shadow:0 0 8px rgba(200,169,106,0.5);}
 
-/* ======= CATALOGUE SCENE BREAK — spans full grid width ======= */
-.cat-scene{
-  grid-column:1/-1;overflow:hidden;margin:4px 0;
+.ts-carousel-wrap{
+  display:flex;align-items:center;gap:10px;
 }
-.cat-scene img{
-  width:100%;height:260px;object-fit:cover;object-position:center;
-  filter:brightness(0.6) contrast(1.06);
-  display:block;
+.ts-arrow{
+  flex-shrink:0;width:40px;height:40px;background:none;
+  border:1px solid var(--border);color:var(--champagne-lt);
+  font-size:1.6rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 0.2s,color 0.2s;
 }
+.ts-arrow:hover{border-color:var(--champagne);color:var(--silver);}
+.ts-track{
+  flex:1;display:flex;gap:10px;align-items:center;overflow:hidden;
+}
+.ts-card{
+  flex:1;position:relative;overflow:hidden;cursor:pointer;
+  transition:opacity 0.35s ease,transform 0.35s ease,flex 0.35s ease;
+}
+.ts-card img{
+  width:100%;height:300px;object-fit:cover;object-position:center;
+  display:block;filter:brightness(0.75) contrast(1.05);
+  transition:filter 0.35s ease;
+}
+.ts-card--side{opacity:0.42;transform:scale(0.93);}
+.ts-card--center img{filter:brightness(0.85) contrast(1.08);}
+.ts-card--center{opacity:1;transform:scale(1);}
+
+.ts-info{
+  margin-top:1.6rem;padding:1.4rem 0;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+  min-height:90px;
+}
+.ts-info-left{display:flex;flex-direction:column;gap:0.4rem;}
+.ts-tag{
+  font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--champagne-lt);border:1px solid var(--champagne-dim);
+  padding:3px 10px;background:rgba(200,169,106,0.07);align-self:flex-start;
+}
+.ts-tag--noir{color:var(--crimson);border-color:var(--crimson-dim);background:rgba(162,50,70,0.07);}
+.ts-tag--orig{color:var(--platinum);border-color:var(--border-hi);}
+.ts-name{
+  font-family:var(--display);font-weight:600;letter-spacing:0.1em;
+  font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--silver);
+}
+.ts-price{
+  font-family:var(--sans);font-size:1rem;color:var(--champagne);
+  letter-spacing:0.06em;
+}
+.ts-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.ts-details-btn{
+  background:none;border:1px solid var(--border-hi);color:var(--platinum-dim);
+  font-family:var(--sans);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+  padding:10px 20px;cursor:pointer;transition:border-color 0.2s,color 0.2s;
+}
+.ts-details-btn:hover{border-color:var(--champagne-dim);color:var(--champagne-lt);}
+.ts-cart-btn{
+  background:linear-gradient(180deg,var(--champagne-lt) 0%,var(--champagne) 60%,var(--champagne-dim) 100%);
+  border:none;color:var(--black);
+  font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;
+  padding:10px 24px;cursor:pointer;
+  box-shadow:0 4px 16px rgba(200,169,106,0.28);
+  transition:filter 0.2s,transform 0.2s;
+}
+.ts-cart-btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+.ts-dots{
+  display:flex;justify-content:center;gap:8px;margin-top:1.4rem;
+}
+.ts-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--border-hi);
+  border:none;cursor:pointer;padding:0;transition:background 0.2s,transform 0.2s;
+}
+.ts-dot.active{background:var(--champagne);transform:scale(1.4);}
 
 @media(max-width:600px){
   .hero-section{min-height:420px;}
-  .scene-break img{height:210px;}
-  .cat-scene img{height:180px;}
+  .ts-card img{height:200px;}
+  .ts-info{flex-direction:column;align-items:flex-start;}
+  .ts-arrow{width:34px;height:34px;font-size:1.3rem;}
 }
 </style>
 </head>
@@ -1005,7 +1076,6 @@ body{font-size:16px;}
 <header>
   <button class="cart-toggle" type="button" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
   <p class="eyebrow">Nakuru · Kajiado · Madaraka</p>
-  <h1 class="brand">NOIR</h1>
   <p class="brand-sub">Scent, after dark</p>
   <div class="orn"><div class="orn-line"></div><div class="orn-d"></div><div class="orn-line r"></div></div>
   <div class="delivery"><div class="dot"></div>Free delivery · Nakuru · Kajiado · Madaraka</div>
@@ -1041,10 +1111,25 @@ body{font-size:16px;}
   </div>
 </div>
 
-<div class="scene-break" aria-hidden="true">
-  <img src="images/4.png" alt="" loading="lazy">
-  <span class="scene-break-label">The art of scent</span>
-</div>
+<!-- TOP SELLERS -->
+<section class="topsellers" aria-label="Top selling fragrances">
+  <p class="ts-eyebrow">Trending Now</p>
+  <h2 class="ts-title">Our Top Sellers</h2>
+  <div class="ts-orn">
+    <div class="ts-orn-line"></div>
+    <div class="ts-orn-d"></div>
+    <div class="ts-orn-line r"></div>
+  </div>
+
+  <div class="ts-carousel-wrap">
+    <button class="ts-arrow" id="ts-prev" onclick="tsNav(-1)" aria-label="Previous">&#8249;</button>
+    <div class="ts-track" id="ts-track"></div>
+    <button class="ts-arrow" id="ts-next" onclick="tsNav(1)" aria-label="Next">&#8250;</button>
+  </div>
+
+  <div class="ts-info" id="ts-info"></div>
+  <div class="ts-dots" id="ts-dots"></div>
+</section>
 
 <section class="discovery-panel" aria-label="À La Carte discovery filters">
   <p class="discovery-title">NOIR À La Carte</p>
@@ -1094,11 +1179,6 @@ body{font-size:16px;}
     <button class="lux-chip" data-filter-group="collection" data-filter-value="most-wanted" onclick="toggleDiscoveryFilter(this,'collection','most-wanted')">👑 Most Wanted</button>
   </div>
 </section>
-
-<div class="scene-break" aria-hidden="true">
-  <img src="images/5.png" alt="" loading="lazy">
-  <span class="scene-break-label">Curated for every occasion</span>
-</div>
 
 <div id="catalogue-anchor"></div>
 <div class="controls">
@@ -1880,6 +1960,59 @@ function detailOverlayClick(e){
 }
 
 /* ===== INIT ===== */
+/* ===== TOP SELLERS CAROUSEL ===== */
+const TOP_SELLERS=[102,41,42,205,209,216];
+const TS_IMGS=['images/9.png','images/5.png'];
+let tsActive=0;
+
+function tsRender(){
+  const n=TOP_SELLERS.length;
+  const prevIdx=(tsActive-1+n)%n;
+  const nextIdx=(tsActive+1)%n;
+
+  const track=document.getElementById('ts-track');
+  track.innerHTML=[prevIdx,tsActive,nextIdx].map((si,pos)=>{
+    const img=TS_IMGS[si%TS_IMGS.length];
+    const isCtr=pos===1;
+    const clickDir=pos===0?-1:1;
+    return `<div class="ts-card ${isCtr?'ts-card--center':'ts-card--side'}" ${isCtr?'':`onclick="tsNav(${clickDir})"`}>
+      <img src="${img}" alt="" loading="lazy">
+    </div>`;
+  }).join('');
+
+  const p=findPerfume(TOP_SELLERS[tsActive]);
+  const info=document.getElementById('ts-info');
+  if(p){
+    const ab=getProductAbout(p);
+    let tagHtml;
+    if(ab.label==='NOIR Original') tagHtml=`<span class="ts-tag ts-tag--noir">◆ NOIR Original</span>`;
+    else if(ab.label==='Original Brand') tagHtml=`<span class="ts-tag ts-tag--orig">✦ Original Brand · ${ab.value}</span>`;
+    else tagHtml=`<span class="ts-tag">◆ Inspired By · ${ab.value}</span>`;
+
+    info.innerHTML=`
+      <div class="ts-info-left">
+        ${tagHtml}
+        <h3 class="ts-name">${p.name}</h3>
+        <p class="ts-price">KES ${p.price.toLocaleString()}</p>
+      </div>
+      <div class="ts-actions">
+        <button class="ts-details-btn" onclick="openDetail(${p.id})">Full Details &#8250;</button>
+        <button class="ts-cart-btn" onclick="addToCart(${p.id},event)">Add to Cart</button>
+      </div>`;
+  }
+
+  document.getElementById('ts-dots').innerHTML=TOP_SELLERS.map((_,i)=>
+    `<button class="ts-dot${i===tsActive?' active':''}" onclick="tsGoTo(${i})" aria-label="Top seller ${i+1}"></button>`
+  ).join('');
+}
+
+function tsNav(dir){
+  tsActive=(tsActive+dir+TOP_SELLERS.length)%TOP_SELLERS.length;
+  tsRender();
+}
+
+function tsGoTo(idx){tsActive=idx;tsRender();}
+
 function init(){
   restoreCart();
   const row=document.getElementById('house-chips');
@@ -1911,6 +2044,16 @@ function init(){
   updateNavDisplay();
   render();
   updateCartUI();
+  tsRender();
+  const tsTrack=document.getElementById('ts-track');
+  if(tsTrack){
+    let tsTouchX=0;
+    tsTrack.addEventListener('touchstart',e=>{tsTouchX=e.changedTouches[0].clientX;},{passive:true});
+    tsTrack.addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].clientX-tsTouchX;
+      if(Math.abs(dx)>40) tsNav(dx<0?1:-1);
+    },{passive:true});
+  }
 }
 
 function setMode(mode){
@@ -2493,26 +2636,12 @@ function isGenuineAffordableHouse(houseKey){
   return ['lattafa','armaf','afnan','rasasi','al-haramain','swiss-arabian'].includes(houseKey);
 }
 
-const CAT_SCENE_IMGS=['images/9.png','images/10.png','images/11.png'];
-const CAT_SCENE_INTERVAL=8;
-
 function render(){
   const f=getFiltered();
   document.getElementById('count-num').textContent=f.length;
   const cat=document.getElementById('catalogue');
   if(!f.length){ cat.innerHTML=`<div class="no-results"><p class="nr-title">Nothing found</p><p class="nr-sub">Try different filters</p></div>`; return; }
-  let html='';
-  f.forEach((p,i)=>{
-    html+=renderCard(p,i);
-    const next=i+1;
-    if(next<f.length && next%CAT_SCENE_INTERVAL===0){
-      const idx=Math.floor(next/CAT_SCENE_INTERVAL)-1;
-      if(idx<CAT_SCENE_IMGS.length){
-        html+=`<div class="cat-scene"><img src="${CAT_SCENE_IMGS[idx]}" alt="" loading="lazy"></div>`;
-      }
-    }
-  });
-  cat.innerHTML=html;
+  cat.innerHTML=f.map((p,i)=>renderCard(p,i)).join('');
 }
 
 /* ===== MODAL ===== */
