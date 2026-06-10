@@ -885,11 +885,122 @@ body{font-size:16px;}
 .detail-list{font-size:1rem;}
 .finput,.fselect,.ftext{font-size:1.05rem;padding:10px 6px;}
 .search-input{font-size:1.3rem;}
+
+/* ======= HERO SECTION ======= */
+.hero-section{
+  position:relative;width:100%;height:100vh;min-height:500px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;z-index:2;
+}
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  filter:brightness(0.5) contrast(1.1);
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(7,7,10,0.2) 0%,rgba(7,7,10,0.45) 55%,rgba(7,7,10,0.97) 100%);
+}
+.hero-content{
+  position:relative;z-index:1;text-align:center;
+  padding:2rem;max-width:720px;
+}
+.hero-eyebrow{
+  font-family:var(--sans);font-weight:200;font-size:11px;
+  letter-spacing:0.65em;color:var(--champagne);text-transform:uppercase;
+  margin-bottom:1.3rem;
+}
+.hero-headline{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(2.6rem,9vw,5.5rem);
+  line-height:1;letter-spacing:0.22em;
+  background:linear-gradient(180deg,#ffffff 0%,#d0d0d8 38%,#9a9aa6 58%,#e6e6ee 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 18px rgba(0,0,0,0.75));
+  margin-bottom:1.1rem;margin-left:0.22em;
+}
+.hero-tagline{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:1.2rem;color:var(--platinum-dim);
+  letter-spacing:0.05em;line-height:1.65;
+  margin-bottom:2.8rem;
+}
+.hero-cta{
+  display:inline-block;
+  padding:16px 48px;
+  background:linear-gradient(180deg,var(--champagne-lt) 0%,var(--champagne) 60%,var(--champagne-dim) 100%);
+  color:var(--black);font-family:var(--sans);font-size:11px;
+  font-weight:500;letter-spacing:0.45em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  box-shadow:0 8px 32px rgba(200,169,106,0.38);
+  transition:filter 0.25s ease,transform 0.25s ease;
+}
+.hero-cta:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--mist);font-size:9px;letter-spacing:0.45em;text-transform:uppercase;z-index:1;
+}
+.hero-scroll-line{
+  width:1px;height:44px;
+  background:linear-gradient(to bottom,var(--champagne-dim),transparent);
+  animation:scrollPulse 2.2s ease infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:0.35;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.12);}}
+
+/* ======= SCENE BREAK — full-width atmospheric image strip ======= */
+.scene-break{
+  width:100%;position:relative;overflow:hidden;z-index:2;
+  margin:2.5rem 0 0;
+}
+.scene-break img{
+  width:100%;height:340px;object-fit:cover;object-position:center 30%;
+  filter:brightness(0.62) contrast(1.08);
+  display:block;
+}
+.scene-break-label{
+  position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-style:italic;font-size:1rem;
+  color:rgba(212,212,220,0.8);letter-spacing:0.06em;
+  text-shadow:0 2px 10px rgba(0,0,0,0.9);white-space:nowrap;pointer-events:none;
+}
+
+/* ======= CATALOGUE SCENE BREAK — spans full grid width ======= */
+.cat-scene{
+  grid-column:1/-1;overflow:hidden;margin:4px 0;
+}
+.cat-scene img{
+  width:100%;height:260px;object-fit:cover;object-position:center;
+  filter:brightness(0.6) contrast(1.06);
+  display:block;
+}
+
+@media(max-width:600px){
+  .hero-section{min-height:420px;}
+  .scene-break img{height:210px;}
+  .cat-scene img{height:180px;}
+}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <div class="vignette"></div>
+
+<section class="hero-section" aria-label="Welcome to NOIR">
+  <img class="hero-img" src="images/perfume_hero.png" alt="NOIR Fragrances — luxury scents">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nakuru · Kajiado · Madaraka</p>
+    <h2 class="hero-headline">NOIR</h2>
+    <p class="hero-tagline">Wear what the room remembers.<br>Discover your signature fragrance.</p>
+    <a class="hero-cta" href="#catalogue-anchor">Explore the Collection</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
 
 <header>
   <button class="cart-toggle" type="button" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
@@ -928,6 +1039,11 @@ body{font-size:16px;}
       <p class="envelope-story-body">NOIR is for the person becoming someone. The one who understands that the scent you choose speaks before you do — in every room, every matatu, every first impression. A fragrance is more than its label; strip the brand away and what remains is the trail you leave behind. That trail is what we follow. Original or quality interpretation, you're here for the same thing — to be remembered. Brand or no brand. We respect your choice, and we make sure you leave smelling like the person you're working to become.</p>
     </div>
   </div>
+</div>
+
+<div class="scene-break" aria-hidden="true">
+  <img src="images/4.png" alt="" loading="lazy">
+  <span class="scene-break-label">The art of scent</span>
 </div>
 
 <section class="discovery-panel" aria-label="À La Carte discovery filters">
@@ -979,6 +1095,12 @@ body{font-size:16px;}
   </div>
 </section>
 
+<div class="scene-break" aria-hidden="true">
+  <img src="images/5.png" alt="" loading="lazy">
+  <span class="scene-break-label">Curated for every occasion</span>
+</div>
+
+<div id="catalogue-anchor"></div>
 <div class="controls">
   <p class="ctrl-label">Browse the House</p>
   <!-- MODE NAVIGATOR (F) -->
@@ -1617,7 +1739,7 @@ const discoveryFilters={gender:new Set(),vibe:new Set(),collection:new Set()};
 const CART_STORAGE_KEY='noir-cart';
 const ORDER_STORAGE_KEY='noir-orders';
 const ORDER_SEQUENCE_KEY='noir-order-sequence';
-const WHATSAPP_NUMBER='254702581356';
+const WHATSAPP_NUMBER='254143701565';
 const cart=[];
 let lastCustomerAcknowledgement='';
 
@@ -2371,12 +2493,26 @@ function isGenuineAffordableHouse(houseKey){
   return ['lattafa','armaf','afnan','rasasi','al-haramain','swiss-arabian'].includes(houseKey);
 }
 
+const CAT_SCENE_IMGS=['images/9.png','images/10.png','images/11.png'];
+const CAT_SCENE_INTERVAL=8;
+
 function render(){
   const f=getFiltered();
   document.getElementById('count-num').textContent=f.length;
   const cat=document.getElementById('catalogue');
   if(!f.length){ cat.innerHTML=`<div class="no-results"><p class="nr-title">Nothing found</p><p class="nr-sub">Try different filters</p></div>`; return; }
-  cat.innerHTML=f.map((p,i)=>renderCard(p,i)).join('');
+  let html='';
+  f.forEach((p,i)=>{
+    html+=renderCard(p,i);
+    const next=i+1;
+    if(next<f.length && next%CAT_SCENE_INTERVAL===0){
+      const idx=Math.floor(next/CAT_SCENE_INTERVAL)-1;
+      if(idx<CAT_SCENE_IMGS.length){
+        html+=`<div class="cat-scene"><img src="${CAT_SCENE_IMGS[idx]}" alt="" loading="lazy"></div>`;
+      }
+    }
+  });
+  cat.innerHTML=html;
 }
 
 /* ===== MODAL ===== */
@@ -2504,7 +2640,7 @@ function toggleWearerProfile(id,event){
 init();
 </script>
   <a
-  href="https://wa.me/254702581356?text=Hello%20NOIR%2C%20I'm%20interested%20in%20a%20fragrance."
+  href="https://wa.me/254143701565?text=Hello%20NOIR%2C%20I'm%20interested%20in%20a%20fragrance."
   class="whatsapp-float"
   target="_blank"
   rel="noopener"
